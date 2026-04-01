@@ -1,0 +1,18 @@
+On the website structure:
+
+The current structure (Homepage, Academic Research, Open Source Projects, CV, Extra Activities) was built for an academic job market. You need to rebuild it for a consulting and industry audience. Here is my recommended new structure:
+
+Homepage — Keep but completely rewrite. Strong one-paragraph professional statement that leads with applied economist, pricing strategy, client impact. Your photo stays. Links to paper and CV prominently placed above the fold.
+
+Research — Keep but reframe. Rename from "Academic Research" to "Research and Writing." Put the Olist paper at the top as your featured working paper with a download link and a two-sentence description. Below that keep the dissertation but reframe it: "Doctoral dissertation on dynamic economic modeling in agricultural commodity markets, focusing on structural estimation and demand systems." Do not hide it but do not lead with beef cattle. The methodology is what matters and structural dynamic modeling is genuinely impressive regardless of industry application.
+
+Blog — Replace Open Source Projects entirely. This becomes your content hub where LinkedIn posts live in longer form. When you post on LinkedIn you also post the full version here. This drives people from LinkedIn to your website and gives you a professional home for your thinking.
+
+CV — Keep exactly as is. Make the PDF downloadable with one click.
+
+About — Replace Extra Activities with a proper About page. Two to three paragraphs. Who you are, what you do, what you are interested in. Human and professional at the same time. This is where personality comes through.
+
+What to remove: Open Source Projects entirely. Small projects from a PhD era do not help you and may actually signal the wrong thing to consulting audiences who want to see economics not coding hobby projects.
+
+Platform: Since it is already on GitHub Pages you have two options. Stay on GitHub Pages and use Jekyll which gives you full control and costs nothing, or migrate to a simple platform like Squarespace or Webflow which is faster to set up and easier to maintain but costs around $15 per month. Given that you are comfortable with R Markdown and LaTeX, staying on GitHub Pages with a better Jekyll theme is probably the right call. You already know how to manage it and the URL stays exactly the same.
+
