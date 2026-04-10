@@ -15,7 +15,7 @@
           gtag('config', 'G-73TQ3W78YM');
         </script>
         
-		<title>Dinesh R Poddaturi - Open Source</title>
+		<title>The Revenue Maximization Trap | Dinesh R Poddaturi</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -32,26 +32,117 @@
 							<!-- Content -->
 								<section>
 									<header class="main">
-										<h1>Blog</h1>
+										<h1>The Revenue Maximization Trap: Why More Sales Can Mean Less Profit</h1>
 									</header>
-									<!--<span class="image main"><img src="images/pic11.jpg" alt="" /></span>-->
 									
+									<p style="color: #888; font-size: 0.85rem;">
+										April 2026 &nbsp;|&nbsp; Pricing Strategy &nbsp;|&nbsp;
+										<a href="blog.html">&larr; Back to Blog</a>
+									</p>
+
+									<hr class="major" />
+
+									<h2>The Problem</h2>
+ 
+									<p align="justify">Most pricing algorithms share a common objective: maximize revenue. This makes intuitive sense. 
+										More revenue means more sales, more customers, more growth. But in elastic markets with real cost structures, 
+										revenue maximization and profit maximization are not the same objective. They can point in opposite directions.
+									</p>
+
+									<p align="justify">Consider an electronics category with a price elasticity of -2.18. A revenue-maximizing algorithm recommends 
+										a 40% price decrease, projecting an 82.7% revenue increase. At a 65% COGS (Cost Of Goods Sold) structure, consistent with industry benchmarks for 
+										consumer electronics, that recommendation reduces profit by 144%. The revenue-optimal price falls below marginal cost at 
+										current volumes, creating a negative margin spiral where increased sales volume amplifies losses rather than generating profit. 
+										The algorithm is technically correct on its own terms and commercially destructive in practice.
+									</p>
+									<p align="justify">This is not an edge case. It is the dominant pattern in elastic markets where cost structures are material.</p>
+
+									<hr />
+
+									<h2>The Finding: Cost Uncertainty Dominates Elasticity Uncertainty</h2>
+
+									<p align="justify">To test the robustness of pricing recommendations, I evaluated a 3x3 sensitivity grid spanning three elasticity 
+										scenarios representing plus or minus 20% estimation error and three cost scenarios spanning 60% to 70% COGS.
+									</p>
+
+									<p align="justify">Two patterns emerged.</p>
+
+									<p align="justify">First, cost structure determines strategic direction more decisively than elasticity. Shifting cost assumptions 
+										by 10 percentage points flips optimal pricing recommendations by 15 to 18 percentage points per category and produces complete 
+										directional reversals in some cases. For Watches and Garden Tools under base case elasticity, the optimal recommendation shifts 
+										from a price decrease to a price increase depending solely on the assumed cost structure. The same elasticity estimate, 
+										different cost assumption, opposite strategic direction.
+									</p>
+
+									<p align="justify">Second, elasticity uncertainty is more forgiving. A 20% error in elasticity estimates keeps all scenarios 
+										profitable. The magnitude of profit gains varies substantially across elasticity scenarios but the direction remains correct. 
+										You can be meaningfully wrong about elasticity and still implement a profitable recommendation. You cannot be meaningfully 
+										wrong about costs.
+									</p>
+
+									<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+									<p style="margin: 0; font-style: italic;">"Cost structure determines strategic direction more decisively than elasticity. 
+										You can be meaningfully wrong about elasticity and still implement a profitable recommendation. You cannot be meaningfully 
+										wrong about costs."
+									</p>
+									</div>
+
+									<hr />
+
+									<h2>What This Means in Practice</h2>
+
+									<p align="justify">The implication for pricing teams is about sequence, not priority. Elasticity estimation and cost validation are 
+										both necessary. The question is which comes first.
+									</p>
+
+									<p align="justify">Most pricing workflows invest heavily in demand modeling. Cost assumptions are often treated as inputs rather 
+										than variables, set once at the start of the analysis and rarely revisited. This is backwards.
+									</p>
+
+									<p align="justify">Cost validation should precede demand model deployment. Before implementing a pricing recommendation, verify the 
+										cost structure it was calibrated against. A misspecified cost assumption does not just reduce profit gains. It can reverse the 
+										strategic direction of the recommendation entirely.
+									</p>
+
+									<p align="justify">Get the costs right first. Then refine the demand model.</p>
+
+									<hr />
+
+									<h2>Conclusion</h2>
+
+									<p align="justify">The revenue maximization trap is not a failure of demand modeling. It is a failure of cost integration. 
+										Pricing algorithms that optimize for revenue without accounting for cost structure will consistently generate recommendations 
+										that are technically correct and commercially destructive.
+									</p>
+
+									<p align="justify">This analysis is part of a broader working paper on profit-aware pricing in two-sided marketplaces, examining 
+										demand elasticity estimation, profit optimization under cost uncertainty, customer lifetime value modeling, and implementation 
+										frameworks across 110,840 transactions from the Olist Brazilian marketplace. The dataset used in this analysis is publicly 
+										available on <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data" target="_blank">Kaggle</a>. The full 
+										paper is available on my <a href="../research.html">research page</a> and 
+										on <a href="https://ssrn.com/abstract=6502262" target="_blank">SSRN</a>.
+									</p>
+
+									<p align="justify">Next I will examine why correct pricing recommendations fail in implementation and what structured rollout 
+										protocols can do about it.
+									</p>
+ 
+									<hr />
+ 
+									<p style="color: #888; font-size: 0.85rem;">
+										<a href="../blog.html">&larr; Back to Blog</a>
+									</p>
+
+
+
 									  
-              </section>
+              					</section>
 						</div>
 					</div>
 
 				<!-- Sidebar -->
 					<div id="sidebar">
 						<div class="inner">
-
-							<!-- Search 
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>-->
-
 							<!-- Menu -->
 								<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
                         <img src="images/MyImage6.png" alt="Dinesh R Poddaturi" 
@@ -73,18 +164,14 @@
 										<h2>Menu</h2>
 									</header>
 									<ul>
-										<li><a href="index.html">Homepage</a></li>
-										<li><a href="research.html">Research & Writing</a></li>
-										<li><a href="blog.html">Blog</a></li>
-										<li><a href="CV.html">CV</a></li>
-										<li><a href="about.html">About</a></li>
+										<li><a href="../index.html">Homepage</a></li>
+										<li><a href="../research.html">Research &amp; Writing</a></li>
+										<li><a href="../blog.html">Blog</a></li>
+										<li><a href="../CV.html">CV</a></li>
+										<li><a href="../about.html">About</a></li>
 									</ul>
 								</nav>
 
-							 <!--Section -->
-								
-
-							<!-- Section -->
 								<section>
 								  <header class="major">
 									  <h2>Social</h2>
@@ -94,7 +181,7 @@
   										  <span class="label">Linkedin</span></a></li>
   									  <li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
   									    <span class="label">Github</span></a></li>
-  										<li><a href="https://ssrn.com/author=YOURID" class="icon solid fa-file-alt" target="_blank">
+  										<li><a href="https://ssrn.com/author=10964128" target="_blank">
   										  <span class="label">SSRN</span></a></li>
   									</ul>
 									</section>
