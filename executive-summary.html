@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Executive Summary: Profit-Aware Pricing | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<style>
+			.summary-note {
+				color: #888;
+				font-size: 0.85rem;
+				font-style: italic;
+				margin-bottom: 2rem;
+			}
+			.callout {
+				background: #f8f8f8;
+				padding: 1.5rem;
+				border-left: 4px solid #f56a6a;
+				margin: 2rem 0;
+			}
+			.callout p {
+				margin: 0;
+				font-style: italic;
+			}
+			.finding-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1.5rem;
+				margin: 1.5rem 0;
+			}
+			.finding-box {
+				background: #f8f8f8;
+				padding: 1.25rem;
+				border-top: 3px solid #f56a6a;
+			}
+			.finding-box h4 {
+				margin: 0 0 0.5rem 0;
+				font-size: 0.95rem;
+				color: #3d4449;
+			}
+			.finding-box p {
+				margin: 0;
+				font-size: 0.9rem;
+			}
+			.stat-highlight {
+				font-size: 1.4rem;
+				font-weight: bold;
+				color: #f56a6a;
+				display: block;
+				margin-bottom: 0.25rem;
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 1.5rem 0;
+				font-size: 0.9rem;
+			}
+			table th {
+				background: #f56a6a;
+				color: white;
+				padding: 0.6rem 1rem;
+				text-align: left;
+			}
+			table td {
+				padding: 0.6rem 1rem;
+				border-bottom: 1px solid #e0e0e0;
+			}
+			table tr:nth-child(even) td {
+				background: #f8f8f8;
+			}
+			.mistake {
+				padding: 0.75rem 1rem;
+				border-left: 3px solid #e0e0e0;
+				margin: 0.75rem 0;
+			}
+			.mistake strong {
+				color: #f56a6a;
+			}
+			.works {
+				padding: 0.75rem 1rem;
+				border-left: 3px solid #f56a6a;
+				margin: 0.75rem 0;
+			}
+			@media (max-width: 768px) {
+				.finding-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Profit-Aware Pricing in Two-Sided Marketplaces</h1>
+						</header>
+
+						<p class="summary-note">
+							2-minute summary &nbsp;|&nbsp; April 2026 &nbsp;|&nbsp;
+							<a href="research.html">Full paper available here</a>
+						</p>
+
+						<p align="justify"> <strong>Most marketplace pricing systems are designed correctly, and still destroy profits.</strong> </p>
+						
+						<p align="justify">They optimize revenue instead of profit. In elastic categories with meaningful cost structures, this leads to systematically 
+						bad decisions. This summary covers the key findings and practical implications. The full 105-page paper with methodology, data, and 
+						implementation frameworks is available on the <a href="research.html">research page</a>.</p>
+						
+						<p class="summary-note">For pricing, strategy, and marketplace teams making production pricing decisions.</p>
+
+						<hr class="major" />
+
+						<h2>The Problem</h2>
+
+						<p align="justify">A revenue-maximizing algorithm recommends a 40% price cut in an electronics category with elastic demand, 
+						projecting an 82.7% revenue increase. At a 65% COGS structure that recommendation reduces profit by 144%. The algorithm is 
+						technically correct on its own terms and commercially destructive in practice.</p>
+
+						<div class="callout">
+							<p>A 40% price cut generates +160% revenue and &minus;162% profit simultaneously. 
+							It is the dominant failure mode in algorithmic pricing.</p>
+						</div>
+
+						<p align="justify">Revenue and profit optimization diverge sharply when demand is elastic and costs are material. 
+						For Electronics with elasticity &eta; = &minus;2.18 and 65% COGS, the profit-optimal strategy is a 
+						20% price <em>increase</em>, not a decrease. Volume falls, but margin per unit rises more than proportionally, 
+						yielding a 5.6% net profit improvement.</p>
+
+						<hr />
+
+						<h2>What Actually Determines Pricing Decisions</h2>
+
+						<p align="justify">Contrary to standard practice, cost accuracy matters more than demand modeling precision.</p>
+
+						<div class="finding-grid">
+							<div class="finding-box">
+								<h4>20% Elasticity Error</h4>
+								<span class="stat-highlight">Profitable</span>
+								<p>All scenarios remain profitable. Direction is preserved. Magnitude changes but the recommendation stays correct.</p>
+							</div>
+							<div class="finding-box">
+								<h4>5-Point COGS Error</h4>
+								<span class="stat-highlight">&minus;70 to 75% of gains</span>
+								<p>Forfeits most potential profit. Can reverse the optimal pricing direction entirely in borderline categories.</p>
+							</div>
+						</div>
+
+						<p align="justify">Every category has a breakeven COGS where marginal revenue equals marginal cost. Electronics has a 
+						breakeven of 54%, well below the realistic industry range of 60 to 75%, making its price increase recommendation directionally 
+						robust. Watches (66%) and Garden Tools (64%) sit near the boundary. A 2 to 3 point cost miss reverses the optimal decision.</p>
+
+						<div class="callout">
+							<p>Validate cost structure before deploying demand models. Cost validation takes 2 to 4 weeks. A/B testing for elasticity 
+							refinement takes 2 to 3 months. The parameter that destroys more value when wrong takes less time to validate.</p>
+						</div>
+
+						<hr />
+
+						<h2>What the Data Actually Shows</h2>
+
+						<p align="justify">Applied to 110,840 transactions across 71 product categories from the Olist Brazilian e-commerce 
+						marketplace (2016–2018).</p>
+
+						<h3>Robust Demand Elasticities</h3>
+
+						<p align="justify">Bucket-level aggregation produced null results (&beta; = +0.09, p = 0.648). Disaggregating to the category 
+						level recovered four robust negative elasticities:</p>
+
+						<table>
+							<tr>
+								<th>Category</th>
+								<th>Elasticity</th>
+								<th>R&sup2;</th>
+							</tr>
+							<tr>
+								<td>Watches / Gifts</td>
+								<td>&minus;2.98</td>
+								<td>0.89</td>
+							</tr>
+							<tr>
+								<td>Garden Tools</td>
+								<td>&minus;2.77</td>
+								<td>0.72</td>
+							</tr>
+							<tr>
+								<td>Electronics</td>
+								<td>&minus;2.18</td>
+								<td>0.62</td>
+							</tr>
+							<tr>
+								<td>Consoles / Games</td>
+								<td>&minus;1.35</td>
+								<td>0.56</td>
+							</tr>
+						</table>
+
+						<h3>Marketplace Structure</h3>
+
+						<p align="justify">The top 20% of sellers generate 82% of revenue (Gini coefficient 0.75). 96% of products have a single seller. 
+						Platform retention strategy should focus disproportionately on a small seller segment.</p>
+
+						<h3>Customer Behavior</h3>
+
+						<p align="justify">97% of customers purchase once. Same-order co-purchase rate across focus categories is 0%. However, 53% of 
+						repeat customers switch categories in their next order with a median return window of 29 days. These patterns invalidate conventional 
+						cross-selling strategies.</p>
+
+						<h3>Freight as a Pricing Variable</h3>
+
+						<p align="justify">Freight and price affect retention probability at approximately equal 
+						magnitude (&beta;<sub>price</sub> = &minus;0.079, &beta;<sub>freight</sub> = &minus;0.076). North region customers pay 
+						51% more in total delivered cost than Southeast customers. Freight is simultaneously an acquisition barrier and a retention 
+						penalty.</p>
+
+						<hr />
+
+						<h2>What Companies Are Getting Wrong</h2>
+
+						<div class="mistake">
+							<strong>Mistake 1: Optimizing for revenue.</strong> In elastic categories with material costs, revenue maximization converts 
+							profitable operations into sustained losses. The algorithm is correct. The objective is wrong.
+						</div>
+
+						<div class="mistake">
+							<strong>Mistake 2: Investing in same-session cross-selling.</strong> With a 0% co-purchase rate across focus categories, 
+							bundle recommendation infrastructure has no customers to target.
+						</div>
+
+						<div class="mistake">
+							<strong>Mistake 3: Treating freight as fixed.</strong> Shipping cost affects retention at the same magnitude as product 
+							price and creates structural demand barriers in remote regions.
+						</div>
+
+						<hr />
+
+						<h2>What Actually Works</h2>
+
+						<div class="works">
+							<strong>Price for profit, not volume.</strong> Apply the Lerner Index framework using validated elasticity and cost structure. 
+							In some categories the profit-optimal move is a price increase, not a decrease, even when demand is elastic.
+						</div>
+
+						<div class="works">
+							<strong>Prioritize cost validation.</strong> Establish the plausible COGS range before committing to a pricing recommendation. 
+							If the range crosses the breakeven threshold, validate costs before acting.
+						</div>
+
+						<div class="works">
+							<strong>Replace bundling with sequential engagement.</strong> Customers do not buy across categories in one session, but 
+							53% return to a different category within 29 days. Time-triggered recommendation campaigns outperform same-session 
+							cross-sell widgets.
+						</div>
+
+						<div class="works">
+							<strong>Use freight strategically.</strong> Free shipping thresholds in high-freight regions, regional pricing tiers, 
+							and local seller recruitment reduce both acquisition barriers and retention penalties simultaneously.
+						</div>
+
+						<hr />
+
+						<h2>Expected Impact</h2>
+
+						<p align="justify">With disciplined implementation, including A/B testing with Bonferroni-corrected stopping rules, 
+						phased rollout design, pilot thresholds, and rollback criteria, the projected annual gain is approximately 
+						8 to 9% above baseline profit, conditional on cost validation and experimental confirmation. This improvement comes 
+						without increasing revenue. In most scenarios it involves decreasing revenue while improving margin.</p>
+
+						<hr />
+
+						<h2>Bottom Line</h2>
+
+						<p align="justify">The failure mode is consistent. Pricing teams optimize revenue instead of profit in elastic, 
+						cost-heavy environments. The fix is straightforward but rarely implemented. Integrate cost into the objective function, 
+						validate it before deployment, and test decisions under uncertainty.</p>
+						
+						<p align="justify">This is not a modeling problem. It is a system design problem.</p>
+
+						<p align="justify">The methodology transfers across industries and data contexts. The point estimates do not. What generalizes 
+						is the framework. Identify the profit-optimal price using the Lerner rule, stress-test it against cost uncertainty, validate 
+						experimentally before full deployment, and build implementation discipline into the process from the start.</p>
+
+						<hr />
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing Strategy</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="index.html">Homepage</a></li>
+							<li><a href="research.html">Research &amp; Writing</a></li>
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="CV.html">CV</a></li>
+							<li><a href="about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
