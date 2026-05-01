@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>What a 3% Repeat Purchase Rate Teaches About Marketplace Loyalty | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>What a 3% Repeat Purchase Rate Teaches About Marketplace Loyalty</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							May 2026 &nbsp;|&nbsp; Marketplace Economics &nbsp;|&nbsp; Empirical Research Note &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							This analysis uses 110,840 transactions from a Brazilian aggregator marketplace to examine sequential purchase behavior and its implications for recommendation system design and customer lifecycle modeling.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Problem with the Obvious Interpretation</h2>
+
+						<p align="justify">
+						In the marketplace I analyzed, 97% of customers made exactly one purchase. That looks like a loyalty problem. It is not.
+						</p>
+
+						<p align="justify">
+						The dataset contains 93,358 unique customers and 110,840 transactions across the Olist marketplace. Customers were buying through large platforms without realizing the underlying seller. Customers complete transactions without forming a direct relationship with the marketplace itself. Platform-level loyalty was never going to form under this structure. The repeat rate reflects the aggregator model, not dissatisfaction.
+						</p>
+
+						<p align="justify">
+						This is a structural interpretation of observed behavior under an aggregator marketplace, not a causal evaluation of platform design. The distinction matters because it changes the strategic question entirely. The question is not how to fix a retention problem. It is how to design engagement systems that work within the structural constraints of an aggregator marketplace.
+						</p>
+
+						<hr />
+
+						<h2>What the Returning Customers Actually Do</h2>
+
+						<p align="justify">
+						Among the 3% of customers who did return, the pattern is not what standard retention frameworks would predict.
+						</p>
+
+						<p align="justify">
+						Of 2,801 repeat customers, 53% purchased from a different category on their second visit. The median time between first and second purchase was 29 days, with a right-skewed distribution where most returning customers arrive within a month but a long tail returns much later. The 25th percentile return time is 21 days and the 75th percentile is 120 days.
+						</p>
+
+						<p align="justify">
+						This is not random. It looks like completing a room. A bed frame, then sheets. Garden tools, then outdoor furniture. Sequential, purposeful purchases.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"The loyalty exists. It just does not look like platform loyalty. It looks like progression."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>Within-Session vs Across-Session Behavior</h2>
+
+						<p align="justify">
+						The most striking finding is not the 53% cross-category rate among returners. It is the contrast with within-session behavior.
+						</p>
+
+						<p align="justify">
+						Within a single order, 96.9% of customers purchase exactly one product category. The same-order co-purchase rate across focus categories is effectively zero. Customers in this marketplace are intent-driven and narrow within a session. They arrive knowing what they need, buy it, and leave.
+						</p>
+
+						<p align="justify">
+						Across sessions, the same customers become exploratory. The 32-percentage-point gap between within-session loyalty (93%) and across-session loyalty (61%) at the bucket level confirms that session boundaries constrain behavior in ways that disappear over time.
+						</p>
+
+						<p align="justify">
+						Same-session bundling does not work here. What works is time-based sequencing. Not "customers also bought." But "customers like you came back 29 days later and bought this."
+						</p>
+
+						<hr />
+
+						<h2>Transition Patterns and Structure</h2>
+
+						<p align="justify">
+						The category transition matrix from the paper identifies the most common sequential flows. At the bucket level, the dominant pattern is bidirectional cycling rather than linear progression.
+						</p>
+
+						<p align="justify">
+						LEISURE AND LIFESTYLE to HOME ESSENTIALS and HOME ESSENTIALS to LEISURE AND LIFESTYLE occur at nearly identical rates — 105 and 104 transitions respectively. The same bidirectionality appears between HOME ESSENTIALS and PERSONAL CARE. Customers cycle through life need categories rather than progressing linearly through a discovery funnel.
+						</p>
+
+						<p align="justify">
+						At the category level, the most actionable transitions are the ones with the highest cross-category probability. Furniture buyers show a 15.5% probability of purchasing bed and bath products next. Garden tools buyers show a 15.5% probability of transitioning to furniture and decor. Electronics buyers show dispersed transitions, consistent with generalist exploration rather than category-specific repeat behavior.
+						</p>
+
+						<hr />
+
+						<h2>Implication for Recommendation Systems</h2>
+
+						<p align="justify">
+						The sequential pattern supports a time-triggered recommendation system that replaces same-session cross-selling with asynchronous category suggestions timed to the natural return window.
+						</p>
+
+						<p align="justify">
+						The data supports three trigger points derived from the empirical return distribution. At day 21, one week before the median return, a personalized recommendation presents the top three sequential categories derived from the transition matrix. At day 29, at the median return window, a follow-up reaches customers who did not engage with the day 21 message. At day 60, a re-engagement campaign targets customers who have not returned.
+						</p>
+
+						<p align="justify">
+						Category-specific logic personalizes these triggers. Garden tools buyers receive furniture and decor recommendations. Electronics buyers receive a broader assortment given the high dispersion in their transitions. Bed and bath buyers receive same-category recommendations given the 58% same-category repeat rate in that segment.
+						</p>
+
+						<p align="justify">
+						From a systems perspective, this shifts recommendation design from session-level bundling to lifecycle-level prediction over time. Recommendation systems that capture this structure move from "what else should we show now" to "what will this customer need next in their lifecycle."
+						</p>
+
+						<hr />
+
+						<h2>Conclusion</h2>
+
+						<p align="justify">
+						A 3% repeat purchase rate in an aggregator marketplace is not a failure. It is a structural feature that defines the problem space. The question is not how to increase platform loyalty directly. It is how to design systems that capture the sequential purchase behavior that already exists among returning customers.
+						</p>
+
+						<p align="justify">
+						The data shows that returning customers are not disengaged. They are progressing through structured consumption paths that unfold over weeks, not sessions. The loyalty exists. It just does not look like platform loyalty. It looks like progression.
+						</p>
+
+						<p align="justify">
+						This analysis is part of a broader working paper on profit-aware pricing in two-sided marketplaces, examining demand elasticity estimation, profit optimization under cost uncertainty, customer lifetime value modeling, and implementation frameworks across 110,840 transactions from the Olist Brazilian marketplace. The full paper is available on my <a href="../research.html">research page</a>.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Marketplace Economics</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
