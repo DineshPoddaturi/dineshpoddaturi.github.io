@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>When a Null Result Is the Answer: Aggregation Bias in Demand Estimation | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>When a Null Result Is the Answer: Aggregation Bias in Demand Estimation</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							May 2026 &nbsp;|&nbsp; Applied Econometrics &nbsp;|&nbsp; Empirical Research Note &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							This analysis draws from a working paper on profit-aware pricing in two-sided marketplaces, examining demand elasticity estimation across 110,840 transactions from the Olist Brazilian 
+							e-commerce marketplace.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Null Result</h2>
+
+						<p align="justify">
+						Getting a null result is not the same as getting no information.
+						</p>
+
+						<p align="justify">
+						The first step in estimating demand elasticities for this project was aggregating the 71 product categories into 10 strategic product buckets, groupings based on purchase motivation similarity. 
+						Consumers buying garden tools tend to browse home improvement products in the same session. Consumers buying electronics tend to browse accessories in the same session. 
+						The bucket structure reflected real shopping behavior. Within-session bucket loyalty was 93%.
+						</p>
+
+						<p align="justify">
+						I estimated price elasticity at this bucket level using monthly aggregated data across 130 observations. The preferred specification, two-way fixed effects controlling for both time trends and 
+						bucket-level differences, returned an elasticity of +0.09 with a p-value of 0.648. Statistically indistinguishable from zero.
+						</p>
+
+						<p align="justify">
+						My first reaction was to question the model. But the model was not the problem. At the wrong aggregation level, pricing teams can conclude demand is inelastic when the signal is simply 
+						being averaged away.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"This null result is informative rather than inconclusive."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>What the Null Result Was Telling Me</h2>
+
+						<p align="justify">
+						The progression from pooled OLS (+2.17) to the fully specified two-way fixed effects model (+0.09) reveals the identification problem. 
+						The pooled model captures spurious positive correlation between price and quantity as the marketplace expanded. Adding time and bucket fixed effects absorbs most of the remaining 
+						identifying variation in price.
+						</p>
+
+						<p align="justify">
+						But there was a deeper issue that the model could not fix on its own. The buckets were constructed around purchase motivation similarity, a valid design choice for strategic analysis. 
+						That same structure, however, introduced a measurement problem for elasticity estimation.
+						</p>
+
+						<p align="justify">
+						When bucket-level average prices increased, it was not always because products became more expensive. Sometimes consumers were simply shifting toward higher-priced products within the same bucket. 
+						A consumer buying a premium smartwatch instead of a budget fitness tracker raises the average LEISURE bucket price without any individual product changing in price. 
+						The aggregate price movement reflected composition changes inside the bucket, not demand response to price.
+						</p>
+
+						<p align="justify">
+						The model absorbed that composition shift and returned noise. The same aggregation that made the buckets strategically meaningful, their internal coherence, made them unreliable for 
+						elasticity estimation.
+						</p>
+
+						<hr />
+
+						<h2>The Unit of Analysis Problem</h2>
+
+						<p align="justify">
+						This is a well-documented problem. Tellis (1988) shows that temporal aggregation introduces positive bias in price elasticity estimates, and that cross-sectional data alone produces substantial 
+						upward bias relative to time series estimates. The unit of analysis is not a technical detail. It is a fundamental determinant of whether elasticity estimates are reliable.
+						</p>
+
+						<p align="justify">
+						With only 10 buckets and 30 fixed effect parameters in a 130-observation dataset, the approach was also overparameterized. The appropriate response was disaggregation, not 
+						abandonment of the elasticity approach.
+						</p>
+
+						<hr />
+
+						<h2>What Disaggregation Recovered</h2>
+
+						<p align="justify">
+						Disaggregating to the original 50 product categories provided 943 observations, approximately 19 months per category, with sufficient variation for elasticity estimation while maintaining meaningful 
+						product differentiation.
+						</p>
+
+						<p align="justify">
+						65% of categories showed negative elasticities in the simple model. Four categories remained robust across both simple and controlled specifications, meeting all three robustness criteria: 
+						negative in both specifications, statistically significant at the 5% level in both, and consistent in magnitude.
+						</p>
+
+						<p align="justify">
+						Watches and Gifts showed an elasticity of -2.98 with R-squared of 0.89, identical across both specifications, indicating strong price comparison behavior in this discretionary gift and 
+						personal accessory category. Garden Tools showed -2.77 with R-squared of 0.72, reflecting the seasonal and deferrable nature of outdoor purchases. 
+						Electronics strengthened with controls from -1.55 to -2.18, suggesting freight costs and review scores were suppressing the true price effect in the simple model. 
+						Consoles and Gaming showed -1.35 with R-squared of 0.56, moderately elastic despite brand loyalty effects.
+						</p>
+
+						<p align="justify">
+						Same data. Same time period. Different unit of analysis. Completely different answer.
+						</p>
+
+						<hr />
+
+						<h2>The Practical Implication</h2>
+
+						<p align="justify">
+						This finding has a direct implication for how practitioners structure pricing analyses. Before estimating elasticities, the question worth asking is whether price movements at the chosen 
+						level of aggregation reflect true price sensitivity or composition changes within the aggregate.
+						</p>
+
+						<p align="justify">
+						If the answer is unclear, the null result itself is informative. It points toward the unit of analysis problem rather than a model failure. Disaggregation is the diagnostic response, 
+						not model refinement.
+						</p>
+
+						<p align="justify">
+						The tool was not wrong. The level of aggregation was.
+						</p>
+
+						<hr />
+
+						<h2>Conclusion</h2>
+
+						<p align="justify">
+						A null result in demand estimation is not a dead end. It is a diagnostic signal. In this case it pointed directly at the unit of analysis problem, a well-documented source of bias that shows up 
+						in modern e-commerce data the same way Tellis documented it in 1988.
+						</p>
+
+						<p align="justify">
+						In pricing work, a null result is often less important than understanding why the signal disappeared.
+						</p>
+
+						<p align="justify">
+						This analysis is part of a broader working paper on profit-aware pricing in two-sided marketplaces, examining demand elasticity estimation, profit optimization under cost uncertainty, 
+						customer lifetime value modeling, and implementation frameworks across 110,840 transactions from the Olist Brazilian marketplace. The full paper is available on my <a href="../research.html">research page</a>.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing Strategy</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
