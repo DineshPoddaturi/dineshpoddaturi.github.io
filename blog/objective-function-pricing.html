@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>When the Model Was Right and the Decision Was Wrong | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>When the Model Was Right and the Decision Was Wrong</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							May 2026 &nbsp;|&nbsp; Pricing Strategy &nbsp;|&nbsp; Empirical Research Note &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							This analysis draws from a working paper on profit-aware pricing in two-sided marketplaces, examining profit optimization across 110,840 transactions from the Olist Brazilian e-commerce marketplace.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Finding</h2>
+
+						<p align="justify">
+						In one electronics category from my marketplace pricing research, the revenue-optimal recommendation produced an 82.7% increase in revenue and a 144% reduction in profit at the same time.
+						</p>
+
+						<p align="justify">
+						The elasticity estimate was directionally correct. Demand responded exactly as the model predicted. The optimization system was working as designed.
+						</p>
+
+						<p align="justify">
+						Most optimization systems fail long before the modeling fails.
+						</p>
+
+						<p align="justify">
+						The problem was that the system was optimizing the wrong objective.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"A technically correct recommendation can still be the wrong business decision."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>The Mechanics</h2>
+
+						<p align="justify">
+						The electronics category in this analysis had a price elasticity of -2.18, meaning demand is highly responsive to price changes. A revenue-maximizing algorithm correctly identifies that 
+						lowering prices will generate substantial volume increases. The 40% price reduction it recommends projects an 82.7% revenue increase, and the demand model is right. That volume increase does materialize.
+						</p>
+
+						<p align="justify">
+						The issue is what happens on the cost side. With a cost of goods sold structure in the range of 60 to 75%, consistent with industry benchmarks for consumer electronics, 
+						the revenue-optimal price falls below the profit-maximizing threshold. At high volumes, each additional unit sold at the discounted price amplifies the loss rather than generating profit. 
+						The result is a margin spiral where more sales means more loss. Relative to the original pricing baseline, projected profit turns negative despite the large increase in revenue.
+						</p>
+
+						<p align="justify">
+						This is not a modeling failure. The demand estimate was accurate. The revenue projection was accurate. The system was behaving exactly as it was instructed to behave. 
+						The failure was in what the system was instructed to do.
+						</p>
+
+						<hr />
+
+						<h2>The Objective Function Problem</h2>
+
+						<p align="justify">
+						Revenue often becomes the default optimization objective in pricing systems because it is easy to measure, easy to communicate, and easy to operationalize. Sales teams report revenue. 
+						Dashboards track revenue. Quarterly targets are denominated in revenue. The entire organizational incentive structure points toward topline growth.
+						</p>
+
+						<p align="justify">
+						Profit maximization requires integrating cost structure into the optimization, which introduces uncertainty, complexity, and the need for cost data that is often harder to validate than demand data. 
+						It is technically harder to do and organizationally harder to defend.
+						</p>
+
+						<p align="justify">
+						So organizations take the path of least resistance. They optimize revenue and assume profit will follow. In inelastic markets with thin cost structures, this assumption often holds. 
+						In elastic markets with material costs, it breaks down systematically.
+						</p>
+
+						<p align="justify">
+						Optimization systems do not understand strategy. They only optimize the incentives they are given. When those incentives are misaligned with the actual business objective, 
+						the system will reliably produce the wrong answer, and do so with high confidence.
+						</p>
+
+						<hr />
+
+						<h2>The Organizational Dimension</h2>
+
+						<p align="justify">
+						The deeper issue is not technical. A profit-aware objective function is not difficult to implement once the cost structure is validated. The harder problem is organizational.
+						</p>
+
+						<p align="justify">
+						Revenue is visible and immediate. Margin destruction from a flawed objective function is invisible until it compounds. A pricing team that shows an 82.7% revenue increase will be celebrated. 
+						The 144% profit reduction will appear in a quarterly review months later, attributed to cost pressures or market conditions, and the connection to the pricing decision will rarely be made explicitly.
+						</p>
+
+						<p align="justify">
+						This is why the problem persists. It is not that organizations do not understand the revenue-profit distinction in theory. It is that the feedback loop between pricing decisions and profit outcomes 
+						is too slow and too noisy to consistently correct misaligned objective functions in practice.
+						</p>
+
+						<hr />
+
+						<h2>The Practical Implication</h2>
+
+						<p align="justify">
+						The most important question in pricing system design is not "how accurate is the demand model?" It is "what is the system being asked to optimize, and is that the right objective?"
+						</p>
+
+						<p align="justify">
+						A well-estimated system with the wrong objective function can outperform a poorly-estimated system with the right one for a long time, until the underlying economics eventually assert themselves.
+						</p>
+
+						<p align="justify">
+						Before investing in model refinement, it is worth asking whether the optimization target itself is correctly specified. In elastic markets with material cost structures, revenue maximization and 
+						profit maximization are not equivalent problems. Treating them as equivalent is the most expensive assumption in applied pricing.
+						</p>
+
+						<hr />
+
+						<h2>Conclusion</h2>
+
+						<p align="justify">
+						The electronics finding from this research is a useful illustration precisely because everything about the modeling was correct. The demand estimate was accurate. The revenue projection was accurate. The system performed exactly as designed.
+						</p>
+
+						<p align="justify">
+						The failure was upstream of the model. It was in what the model was asked to optimize.
+						</p>
+
+						<p align="justify">
+						This analysis is part of a broader working paper on profit-aware pricing in two-sided marketplaces, examining demand elasticity estimation, profit optimization under cost uncertainty, customer lifetime value modeling, and implementation frameworks across 110,840 transactions from the Olist Brazilian marketplace. The full paper is available on my <a href="../research.html">research page</a>.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing Strategy</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
