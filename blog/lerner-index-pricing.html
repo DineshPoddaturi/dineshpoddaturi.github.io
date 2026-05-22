@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>The Lerner Index in Practice: When Elastic Demand Requires a Price Increase | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>The Lerner Index in Practice: When Elastic Demand Requires a Price Increase</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							May 2026 &nbsp;|&nbsp; Pricing Strategy &nbsp;|&nbsp; Empirical Research Note &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							This analysis draws from a working paper on profit-aware pricing in two-sided marketplaces, examining profit optimization 
+							across 110,840 transactions from the Olist Brazilian e-commerce marketplace.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Textbook Version</h2>
+
+						<p align="justify">
+						The Lerner Index says the optimal markup over marginal cost is inversely related to demand elasticity. Elastic demand means lower markups. 
+						Inelastic demand permits premium pricing. The formula is one line.
+						</p>
+
+						<p align="justify">
+						In practice, applying the Lerner rule to real marketplace data produces results that initially appear to contradict the textbook intuition. 
+						In the electronics category I analyzed, demand is elastic and the profit-optimal recommendation is a 20% price increase, not a price cut.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"A revenue-maximizing algorithm recommended a 40% price cut. The Lerner rule recommended a 20% price increase. 
+								Both were internally correct. They are optimizing different objective functions under the same underlying demand structure."
+							</p>
+						</div>
+
+						<p align="justify">
+						What looks like a contradiction is actually a difference in what each framework treats as the binding constraint. The revenue optimizer
+						encodes demand as the sufficient statistic. The Lerner rule encodes the margin structure. They diverge not because one is wrong, but 
+						because they are asking different questions of the same data.
+						</p>
+
+						<hr />
+
+						<h2>The Finding</h2>
+
+						<p align="justify">
+						Electronics in this marketplace has a price elasticity of -2.18. Demand is elastic. A revenue-maximizing algorithm correctly identifies 
+						that lowering prices will generate substantial volume increases. The recommended 40% price cut projects an 82.7% revenue increase, and the demand 
+						model is right. That volume increase does materialize.
+						</p>
+
+						<p align="justify">
+						The Lerner rule points in the opposite direction. Given a cost of goods sold structure of 65% and a resulting gross margin of 35%, it 
+						recommends raising the Electronics price by 20%.
+						</p>
+
+						<p align="justify">
+						The revenue-optimal recommendation reduces profit by 144%. The profit-optimal recommendation sacrifices 19.4% of revenue for a 5.6% profit 
+						improvement. Volume falls 32.8% under the profit-optimal strategy, but margin per unit increases enough to generate a net gain.
+						</p>
+
+						<hr />
+
+						<h2>Why Elastic Demand Can Require a Price Increase</h2>
+
+						<p align="justify">
+						This result is counterintuitive because textbook Lerner analysis is often presented in terms of markup magnitude, not pricing direction. 
+						The implicit assumption is that the current price is at or near the revenue-maximizing level, and the question is how much above that the 
+						profit-maximizing price sits.
+						</p>
+
+						<p align="justify">
+						In practice, current prices are not always at the revenue-maximizing level. In this case, the current Electronics price is already below 
+						the profit-maximizing threshold. Additional price cuts increase volume but destroy marginal contribution at each unit. The margin at 
+						current pricing is thin enough that the profit-maximizing price sits above the current price, not below it.
+						</p>
+
+						<p align="justify">
+						The Lerner rule does not say elastic categories should always have low prices. It says the markup over marginal cost should be low 
+						relative to the price level. When margins are compressed, the profit-maximizing price can require an increase even under elastic demand, 
+						because the current price is not covering costs efficiently at current volumes.
+						</p>
+
+						<hr />
+
+						<h2>The Cost Structure Problem</h2>
+
+						<p align="justify">
+						What makes the Lerner rule difficult to apply in practice is not the formula. It is the combination of two inputs it requires 
+						simultaneously: a reliable elasticity estimate and a validated cost structure. Most pricing systems have one or the other, but rarely 
+						both with sufficient precision.
+						</p>
+
+						<p align="justify">
+						The sensitivity of the recommendation to cost assumptions is substantial. Electronics has a breakeven COGS of 54%, meaning the 
+						recommendation is directionally robust across the plausible industry range of 60 to 75%. A 5-point shift in the cost assumption is 
+						enough to change the magnitude of the recommended adjustment significantly, and in categories closer to the breakeven threshold, a 
+						similar shift reverses the direction entirely.
+						</p>
+
+						<p align="justify">
+						This is why cost validation precedes elasticity refinement in the implementation framework I develop in the working paper. The Lerner 
+						rule cannot produce reliable recommendations without a validated cost structure. Elasticity precision is the secondary constraint.
+						</p>
+
+						<hr />
+
+						<h2>The Decision Implication</h2>
+
+						<p align="justify">
+						Textbook pricing theory is not wrong. It is incomplete until the cost structure is explicitly included in the decision system.
+						</p>
+
+						<p align="justify">
+						The most common failure mode is not a bad demand model. It is a pricing system that treats cost assumptions as background inputs rather 
+						than primary constraints. The Lerner rule makes the cost dependence of the optimal price explicit and measurable. Revenue optimization 
+						obscures it entirely.
+						</p>
+
+						<p align="justify">
+						In practice, this means revenue-optimized pricing systems in elastic categories can systematically scale margin destruction. The Lerner 
+						rule makes that visible before deployment, not after.
+						</p>
+
+						<hr />
+
+						<h2>Conclusion</h2>
+
+						<p align="justify">
+						The Electronics result is useful precisely because it challenges the intuition that elastic demand always calls for lower prices. The 
+						demand estimate was accurate. The revenue projection was accurate. What the revenue optimizer missed was the cost structure that made the 
+						current price suboptimal in the wrong direction.
+						</p>
+
+						<p align="justify">
+						Profit-optimal pricing in elastic categories with thin margins often requires raising prices, not cutting them. The Lerner Index makes 
+						this explicit. Getting there requires having the cost structure validated before the elasticity estimate is deployed.
+						</p>
+
+						<p align="justify">
+						This analysis is part of a broader working paper on profit-aware pricing in two-sided marketplaces, examining demand elasticity estimation, 
+						profit optimization under cost uncertainty, customer lifetime value modeling, and implementation frameworks across 110,840 transactions 
+						from the Olist Brazilian marketplace. The full paper is available on my <a href="../research.html">research page</a>.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing Strategy</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
