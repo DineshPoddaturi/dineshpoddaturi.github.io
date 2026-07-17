@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>How to Choose the Right Causal Inference Method | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>How to Choose the Right Causal Inference Method</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							July 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Causal Inference &nbsp;|&nbsp; Industrial Organization &nbsp;|&nbsp; Marketplace Economics &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							The hardest part of causal inference is not choosing a method. It is constructing a 
+							credible counterfactual. This post walks through a practical decision framework for 
+							selecting the right empirical strategy when randomization is not possible.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Core Problem</h2>
+
+						<p align="justify">
+						The hardest part of causal inference is not choosing a method. It is constructing a credible counterfactual.
+						</p>
+
+						<p align="justify">
+						In most real-world business settings, we cannot run every experiment we want. The question is 
+						what we can credibly estimate with the data and setting we have.
+						</p>
+
+						<p align="justify">
+						Without a credible counterfactual, we cannot separate correlation from causation.
+						</p>
+
+						<p align="justify">
+						Randomization is not always possible because of budget, timing, ethics, or simply because 
+						the intervention has already happened. A merger has closed. A pricing initiative has already 
+						launched. A regulatory change has already taken effect.
+						</p>
+
+						<p align="justify">
+						So the real question becomes: which method can I credibly use here?
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"There is no universally best method. Every method trades stronger assumptions for broader 
+								applicability. The best method is the one whose assumptions are most credible for your setting."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>The Decision Framework</h2>
+
+						<p align="justify">
+						The answer depends on which assumptions are credible, what data are available, and what is 
+						feasible in practice. Here is how I think about it.
+						</p>
+
+						<p align="justify">
+						<strong>If you can randomize</strong>, an A/B test is usually the cleanest answer. Random assignment 
+						breaks the link between treatment and confounders. The identification assumption is satisfied by 
+						design. Standard inference applies.
+						</p>
+
+						<p align="justify">
+						<strong>If network effects prevent user-level randomization</strong>, a switchback experiment 
+						randomizes over time periods instead. When a price change in one market affects supply or demand 
+						in adjacent markets, user-level A/B testing introduces interference. Switchbacks handle this by 
+						alternating treatment and control periods rather than treatment and control units.
+						</p>
+
+						<p align="justify">
+						<strong>If a comparable control group exists and parallel trends is credible</strong>, 
+						Difference-in-Differences is often the right tool. DiD compares the change in outcomes over 
+						time between a treated group and a control group. The key assumption is that absent the 
+						intervention, the two groups would have followed the same trend. Common macroeconomic shocks 
+						are differenced out. What matters is whether differential trends between the groups are plausible.
+						</p>
+
+						<p align="justify">
+						<strong>If no single control unit is defensible</strong>, Synthetic Controls constructs a weighted 
+						combination of donor units that tracks the treated unit before the intervention. Rather than 
+						selecting one comparison unit and arguing it is similar, synthetic controls builds a data-driven 
+						counterfactual whose pre-treatment fit is directly visible and verifiable. This is particularly 
+						useful in antitrust cases where the yardstick market is contested.
+						</p>
+
+						<p align="justify">
+						<strong>If there are many observed confounders and the relationships are complex</strong>, Double Machine 
+						Learning helps isolate the treatment effect after accounting for those confounders. DML partials 
+						out the confounders from both the treatment and outcome using flexible machine learning models, 
+						then estimates the causal effect on the residuals. It is particularly useful when there are 
+						many potential confounders and the relationship between those confounders, treatment, and 
+						outcome is complex or unknown.
+						</p>
+
+						<hr />
+
+						<h2>The Principle Behind the Framework</h2>
+
+						<p align="justify">
+						Good causal inference is less about knowing every method and more about understanding the 
+						assumptions each method requires.
+						</p>
+
+						<p align="justify">
+						Every causal inference method relies on different identifying assumptions and makes different 
+						trade-offs between credibility and applicability. The best method is the one whose assumptions 
+						are most credible for your setting.
+						</p>
+
+						<p align="justify">
+						This applies whether you are evaluating a pricing change at a marketplace, simulating the 
+						competitive effects of a merger, measuring overcharge damages in an antitrust case, or 
+						assessing the impact of a platform policy on buyer behavior.
+						</p>
+
+						<p align="justify">
+						The challenge is always the same: constructing a credible counterfactual. The tool matters 
+						less than the identification strategy behind it.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+						Angrist, J. and Pischke, J.S. (2009). <em>Mostly Harmless Econometrics: An Empiricist's Companion.</em> Princeton University Press. The standard reference for applied causal inference.
+						</p>
+
+						<p align="justify">
+						Card, D. and Krueger, A. (1994). Minimum Wages and Employment: A Case Study of the Fast-Food 
+						Industry in New Jersey and Pennsylvania. <em>American Economic Review</em>, 84(4), 772–793. The landmark DiD application.
+						</p>
+
+						<p align="justify">
+						Abadie, A., Diamond, A., and Hainmueller, J. (2010). Synthetic Control Methods for Comparative 
+						Case Studies. <em>Journal of the American Statistical Association</em>, 105(490), 493–505.
+						</p>
+
+						<p align="justify">
+						Abadie, A. (2021). Using Synthetic Controls: Feasibility, Data Requirements, and Methodological 
+						Aspects. <em>Journal of Economic Literature</em>, 59(2), 391–425. The practitioner guide to synthetic controls.
+						</p>
+
+						<p align="justify">
+						Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C., Newey, W., and Robins, J. (2018). 
+						Double/Debiased Machine Learning for Treatment and Structural Parameters. 
+						<em>The Econometrics Journal</em>, 21(1), C1–C68. The foundational Double ML paper.
+						</p>
+
+						<p align="justify">
+						Kohavi, R., Tang, D., and Xu, Y. (2020). <em>Trustworthy Online Controlled Experiments: A Practical 
+						Guide to A/B Testing.</em> Cambridge University Press. The practitioner guide to A/B testing at scale.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing Strategy</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
