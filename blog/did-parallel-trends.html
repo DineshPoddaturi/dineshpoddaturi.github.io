@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Why Parallel Trends Is the Most Important Assumption in DiD | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="A statistically significant Difference-in-Differences estimate can still be wrong if the parallel trends assumption fails. This post explains why parallel trends matters, how it can be violated, and how to test it using event study plots." />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Why Parallel Trends Is the Most Important Assumption in Difference-in-Differences</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							July 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Causal Inference &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							A Difference-in-Differences estimate can look statistically clean and still be wrong. This post
+							explains why the parallel trends assumption is the foundation of every DiD analysis, what happens
+							when it fails, and how to test it in practice.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Core Assumption</h2>
+
+						<p align="justify">
+						Difference-in-Differences estimates a treatment effect by comparing the change in outcomes over time
+						between a treated group and a control group. The method relies on one critical assumption: in the
+						absence of the intervention, the treated and control groups would have followed parallel trends.
+						</p>
+
+						<p align="justify">
+						This assumption does more work than it first appears to. If it fails, the DiD regression will still
+						produce a treatment effect estimate. The model does not know whether its own assumption holds. The
+						estimate will simply combine the true treatment effect with whatever pre-existing difference in
+						trends existed between the two groups. There is no diagnostic built into the regression output that
+						tells you this has happened. The coefficient looks the same whether the assumption holds or not.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"A DiD model is only as good as its counterfactual. Without a believable counterfactual,
+								even a statistically significant estimate can tell the wrong story."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>Why Systematic Differences Are Not About the Intervention</h2>
+
+						<p align="justify">
+						The differences that violate parallel trends do not need to have anything to do with the
+						intervention itself. Consider a concrete example. Suppose a city is experiencing rapid population
+						growth because a major employer just opened a new headquarters there. Later, that same city is used
+						as the control group for a pricing experiment conducted in a similar but demographically stagnant
+						city.
+						</p>
+
+						<p align="justify">
+						Even before the intervention takes place, the two cities are already on different trajectories. The
+						growing city's revenue, demand, and pricing dynamics are shifting for reasons entirely unrelated to
+						the pricing experiment. Once the intervention occurs, any observed difference between the two cities
+						reflects both the treatment effect and this pre-existing divergence. The DiD estimator has no way to
+						separate the two. The regression coefficient will be a mixture of a real causal effect and a
+						confound that has nothing to do with the treatment.
+						</p>
+
+						<p align="justify">
+						This is precisely why parallel trends is not a technicality to be checked and forgotten. It is the
+						condition that determines whether the comparison is valid at all.
+						</p>
+
+						<hr />
+
+						<h2>What Parallel Trends Is Not</h2>
+
+						<p align="justify">
+						A common misunderstanding is that parallel trends requires the treated and control groups to start
+						at the same level before treatment. This is incorrect. The treated group can have a much higher or
+						lower baseline outcome than the control group. What matters is the trajectory, not the starting
+						point. Two groups with very different baseline revenue can still satisfy parallel trends if they
+						move together over time, rising and falling by similar amounts in the periods leading up to the
+						intervention.
+						</p>
+
+						<p align="justify">
+						This distinction matters in practice. Analysts sometimes reject a potential control group because
+						its baseline level looks different from the treated group, when the actual test that matters is
+						whether the two groups' trends have historically moved together.
+						</p>
+
+						<hr />
+
+						<h2>How to Test the Assumption</h2>
+
+						<p align="justify">
+						Parallel trends cannot be tested for the post-treatment period. That is the entire reason the
+						assumption is required in the first place. But it can be examined using pre-treatment data. The
+						standard approach is an event study plot.
+						</p>
+
+						<p align="justify">
+						An event study plots the treatment-control coefficient for each time period relative to the
+						intervention, with time on the horizontal axis and the coefficient on the vertical axis. The
+						coefficients before the intervention are the ones that matter for this diagnostic. If those
+						pre-treatment coefficients are relatively stable and centered around zero, the evidence is
+						consistent with parallel trends. The two groups were moving together before the intervention took
+						place. If the pre-treatment coefficients drift systematically away from zero in either direction,
+						that is a warning sign. It suggests the two groups were already diverging before treatment, and any
+						post-treatment estimate will likely reflect that divergence rather than a clean causal effect.
+						</p>
+
+						<p align="justify">
+						This diagnostic is necessary but not sufficient. A clean-looking pre-trend does not guarantee that
+						parallel trends would have held going forward absent the intervention. It only provides evidence
+						that the assumption is plausible. Economists sometimes describe this as testing a necessary
+						condition rather than proving the assumption directly, since the post-treatment counterfactual can
+						never be observed.
+						</p>
+
+						<div style="margin: 2rem 0; text-align: center;">
+							<img src="Plots/event-study-parallel-trends.png" alt="Event study plot showing stable versus drifting pre-treatment trends"
+								style="max-width: 100%; height: auto; border: 1px solid #eeeeee;" />
+							<p style="color: #888; font-size: 0.8rem; margin-top: 0.5rem;">
+								Illustrative event study plot. The dark line shows a stable pre-treatment trend near zero,
+								consistent with parallel trends. The red dashed line shows coefficients drifting away from
+								zero before the intervention, a warning sign that the groups were already diverging.
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>Common Threats to Parallel Trends</h2>
+
+						<p align="justify">
+						Beyond the differential growth example above, three other mechanisms commonly threaten the parallel
+						trends assumption in applied work.
+						</p>
+
+						<p align="justify">
+						<strong>Selection into treatment.</strong> If units were selected for treatment precisely because
+						they were already on a different trajectory, a struggling store selected for a turnaround pricing
+						initiative, for example, the pre-treatment trend itself reflects the reason for selection, not a
+						clean baseline.
+						</p>
+
+						<p align="justify">
+						<strong>Anticipation effects.</strong> If agents know a treatment is coming before it formally
+						begins, they may adjust behavior in advance. A firm expecting a price increase next quarter might
+						change purchasing behavior this quarter, contaminating the pre-treatment period before the
+						intervention has technically started.
+						</p>
+
+						<p align="justify">
+						<strong>The Ashenfelter dip.</strong> Units are sometimes selected for treatment because they just
+						experienced a temporary decline in outcomes. If that decline naturally reverses on its own, mean
+						reversion, the recovery can look like a treatment effect even though it is simply a return to normal conditions.
+						</p>
+
+						<hr />
+
+						<h2>Common Shocks Are Not the Threat</h2>
+
+						<p align="justify">
+						One important clarification: parallel trends does not require the absence of common shocks. A
+						recession, a seasonal pattern, or an industry-wide shift that affects both the treated and control
+						groups equally is not a violation of the assumption. These common shocks are differenced out by
+						construction, that is exactly what the "differences" in Difference-in-Differences is doing. The
+						threat to parallel trends comes specifically from differential trends between the groups, not from
+						shared trends that both groups experience together.
+						</p>
+
+						<hr />
+
+						<h2>Why This Matters Beyond the Regression</h2>
+
+						<p align="justify">
+						A DiD model is only as good as its counterfactual. In consulting and litigation settings, the
+						choice of comparison group is almost always the most contested element of a damages or policy
+						evaluation analysis. Opposing experts do not typically attack the regression specification itself.
+						They attack whether the chosen control group satisfies parallel trends. In tech and marketplace
+						settings, the same logic applies to geographic experiments and policy rollouts: the credibility of
+						the causal claim rests entirely on whether the comparison market was a valid counterfactual before
+						the intervention began.
+						</p>
+
+						<p align="justify">
+						Without a believable counterfactual, even a statistically significant estimate can tell the wrong
+						story.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+						Card, D. and Krueger, A. (1994). Minimum Wages and Employment: A Case Study of the Fast-Food
+						Industry in New Jersey and Pennsylvania. <em>American Economic Review</em>, 84(4), 772–793. The
+						landmark applied DiD study.
+						</p>
+
+						<p align="justify">
+						Angrist, J. and Pischke, J.S. (2009). <em>Mostly Harmless Econometrics: An Empiricist's
+						Companion.</em> Princeton University Press. Standard reference for the identifying assumptions
+						behind DiD and related methods.
+						</p>
+
+						<p align="justify">
+						Roth, J. (2022). Pretest with Caution: Event-Study Estimates after Testing for Parallel Trends.
+						<em>American Economic Review: Insights</em>, 4(3), 305–322. A careful treatment of the limitations
+						of pre-trend testing as evidence for parallel trends.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
