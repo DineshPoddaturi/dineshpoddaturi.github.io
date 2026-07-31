@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Why Staggered DiD Can Fail Even When Parallel Trends Holds | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="A staggered rollout can make a standard DiD estimate wrong, even when parallel trends holds perfectly. This post explains why, using Goodman-Bacon's decomposition, and how cohort-based estimators like Callaway and Sant'Anna's fix it." />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Why Staggered DiD Can Fail Even When Parallel Trends Holds</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							July 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Causal Inference &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							A staggered rollout can make a standard Difference-in-Differences estimate wrong, even when
+							parallel trends holds perfectly. This post explains why, using the Goodman-Bacon decomposition,
+							and walks through the cohort-based fix proposed by Callaway and Sant'Anna.
+						</p>
+
+						<hr class="major" />
+
+						<h2>Treatment Rarely Happens to Everyone at Once</h2>
+
+						<p align="justify">
+						Treatment does not always happen to everyone at once. A platform update might roll out to
+						different markets over several months. A merger closes on one date for one deal and a
+						different date for another. So might a policy change, introduced region by region rather
+						than everywhere simultaneously. This is staggered treatment timing, and it is closer to the
+						norm in applied work than the clean, single-period treatment assumed in a textbook DiD example.
+						</p>
+
+						<p align="justify">
+						The temptation is to run standard TWFE anyway. In
+						practice this usually means estimating a two-way fixed effects model, TWFE, with unit and
+						time fixed effects, plus a treatment indicator. The regression runs without complaint and
+						produces a coefficient. The question is whether that coefficient identifies the treatment
+						effect you think it does.
+						</p>
+
+						<hr />
+
+						<h2>What Goodman-Bacon Showed</h2>
+
+						<p align="justify">
+						Goodman-Bacon (2021) provided the key decomposition. He showed that the standard TWFE
+						estimator in a staggered setting is mathematically equivalent to a weighted average of every
+						possible pairwise 2x2 DiD comparison across all treatment timing groups in the data.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"The standard estimator implicitly compares already-treated units against each other,
+								using earlier-treated units as controls for later-treated ones."
+							</p>
+						</div>
+
+						<p align="justify">
+						Some of those pairwise comparisons are exactly what you would want: an early-treated group
+						compared against a never-treated group, or a later-treated group compared against units that
+						have not yet been treated. But other comparisons in the decomposition use an already-treated
+						group as the control for a group that is treated even later. In that comparison, the
+						"control" group is not actually untreated. Its own treatment effect may still be evolving,
+						and whatever change is happening in that group gets absorbed into what should have been a
+						clean counterfactual.
+						</p>
+
+						<hr />
+
+						<h2>Why This Produces Bias, Not Just Noise</h2>
+
+						<p align="justify">
+						De Chaisemartin and D'Haultfœuille (2020) showed why the already-treated-as-control problem is
+						not a minor technical footnote. When treatment effects are heterogeneous, meaning they vary
+						across units or change over time as a treatment matures, the weights attached to these
+						problematic comparisons in the TWFE aggregation can become negative.
+						</p>
+
+						<p align="justify">
+						A negative weight means that a comparison is subtracted from the overall estimate rather than
+						added to it. If enough of these negative-weight comparisons accumulate, and if the true
+						treatment effects being compared are large enough, the final aggregate TWFE coefficient can
+						end up with the opposite sign from every individual unit's true effect. In the most extreme
+						case, every single unit in the data could have experienced a genuinely positive treatment
+						effect, and the standard TWFE regression could still report a negative overall coefficient.
+						This is not sampling noise. It is a structural property of how the estimator aggregates
+						contaminated comparisons.
+						</p>
+
+						<hr />
+
+						<h2>The Fix: Cohort-Based Estimation</h2>
+
+						<p align="justify">
+						Callaway and Sant'Anna (2021) proposed a solution that avoids the contamination directly
+						rather than trying to correct for it after the fact. Instead of running one pooled regression
+						across every unit and time period, their approach defines cohorts, groups of units that were
+						all first treated in the same period, and estimates a separate treatment effect for each
+						cohort.
+						</p>
+
+						<p align="justify">
+						Critically, each cohort-specific estimate is constructed using only never-treated units or
+						not-yet-treated units as the comparison group. Already-treated units are never used as
+						controls for anyone. This eliminates the exact source of contamination that Goodman-Bacon
+						identified, since the comparisons that produced negative weights simply are not permitted
+						in the estimation.
+						</p>
+
+						<p align="justify">
+						Once each cohort has a clean, credible estimate, the cohort-specific estimates are
+						aggregated using weights appropriate for the question being asked, for example equal
+						cohort weights, population weights, or event-study averages, rather than forcing every
+						observation into a single regression.
+						</p>
+
+						<hr />
+
+						<h2>Parallel Trends Is Not the End of the Checklist</h2>
+
+						<p align="justify">
+						This is the point that is easy to miss. Even if parallel trends holds, the identification
+						problem is not over in a staggered setting. An already-treated unit can satisfy parallel
+						trends perfectly in its own pre-treatment period. That assumption is about the trajectory
+						before treatment begins. It says nothing about whether that same unit, now already treated,
+						is a valid control for a different unit that has not yet been treated.
+						</p>
+
+						<p align="justify">
+						If that already-treated unit is serving as a control, its own treatment effect is still
+						unfolding during the period being used as the "control" trend. That is not a clean
+						counterfactual, no matter how well the pre-trends line up. The two questions, does parallel
+						trends hold, and is my control group actually untreated, are separate questions, and a
+						staggered setting is exactly where they can come apart.
+						</p>
+
+						<p align="justify">
+						The lesson is simple: satisfying parallel trends does not guarantee valid identification
+						under staggered adoption. When treatment timing varies, the choice of comparison group
+						becomes part of the identification strategy itself.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+						Goodman-Bacon, A. (2021). Difference-in-Differences with Variation in Treatment Timing.
+						<em>Journal of Econometrics</em>, 225(2), 254-277.
+						</p>
+
+						<p align="justify">
+						de Chaisemartin, C. and D'Haultfœuille, X. (2020). Two-Way Fixed Effects Estimators with
+						Heterogeneous Treatment Effects. <em>American Economic Review</em>, 110(9), 2964-2996.
+						</p>
+
+						<p align="justify">
+						Callaway, B. and Sant'Anna, P. (2021). Difference-in-Differences with Multiple Time Periods.
+						<em>Journal of Econometrics</em>, 225(2), 200-230.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
