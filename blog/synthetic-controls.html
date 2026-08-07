@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>When There Is No Comparable Control: How Synthetic Controls Build One | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Not every causal question has an obvious control group. This post explains how synthetic control methods build a credible counterfactual out of a weighted combination of untreated units, and how to validate whether that counterfactual can be trusted." />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>When There Is No Comparable Control: How Synthetic Controls Build One</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							August 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Causal Inference &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							Not every causal question has an obvious control group. This post explains how synthetic
+							control methods build a credible counterfactual out of a weighted combination of untreated
+							units, and how to validate whether that counterfactual can actually be trusted.
+						</p>
+
+						<hr class="major" />
+
+						<h2>When Difference-in-Differences Runs Out of Road</h2>
+
+						<p align="justify">
+						Difference-in-Differences depends on finding a comparable control group, a unit that would
+						have followed a similar trajectory to the treated unit absent the intervention. In many
+						settings this is available. In others, it is not.
+						</p>
+
+						<p align="justify">
+						A state changes its regulation on a marketplace. A city rolls out a new platform policy. A
+						single large firm undergoes a merger. In cases like these, there is often exactly one treated
+						unit and no single comparable unit that would make a credible DiD control. The treated market
+						may simply be too different from every other market to have a credible single comparison
+						group. Forcing a DiD comparison in this setting means picking a control
+						that does not actually resemble the treated unit, which undermines the credibility of the
+						entire exercise before any estimation even begins.
+						</p>
+
+						<hr />
+
+						<h2>Building a Counterfactual Instead of Finding One</h2>
+
+						<p align="justify">
+						Synthetic control, developed by Abadie, Diamond, and Hainmueller, addresses this by
+						constructing a counterfactual rather than searching for one. Instead of a single comparable
+						unit, the method combines several untreated units, the donor pool, into a weighted average
+						designed to resemble the treated unit as closely as possible before the intervention.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"A credible counterfactual does not always come from a single comparable market.
+								Sometimes it comes from combining several markets that, together, behave like the
+								treated market did before the intervention."
+							</p>
+						</div>
+
+						<p align="justify">
+						The weights are estimated, not chosen arbitrarily. They are selected, typically through a constrained
+						optimization, to minimize the gap between the treated unit and the weighted combination of
+						donor units across a set of predictor variables and pre-intervention outcomes. Each donor
+						unit's weight is non-negative, and the weights sum to one, meaning the synthetic control is a
+						genuine weighted average, not an extrapolation beyond the range of the observed data. This
+						restriction, often referred to as the convex hull condition, is part of what gives the method its
+						discipline. The synthetic control cannot claim to represent a combination that lies outside
+						what the actual donor units show.
+						</p>
+
+						<hr />
+
+						<h2>Validating the Fit: More Than Just a Visual Check</h2>
+
+						<p align="justify">
+						The credibility of a synthetic control estimate rests entirely on how well the synthetic unit
+						tracks the treated unit before the intervention. There are three common ways to check this,
+						each adding a different kind of evidence.
+						</p>
+
+						<p align="justify">
+						<strong>Visual inspection.</strong> Plot the treated unit and the synthetic control together
+						over the pre-intervention period. If the two lines track closely before treatment, that is a
+						first, informal signal of credibility. If they diverge meaningfully, the counterfactual should
+						not be trusted regardless of what the post-treatment gap shows.
+						</p>
+
+						<p align="justify">
+						<strong>Pre-period RMSPE.</strong> Root mean squared prediction error quantifies the visual
+						check numerically, measuring the average gap between the treated unit and the synthetic
+						control across the pre-intervention period. A low pre-period RMSPE indicates a tight fit. This
+						number also becomes the basis for the third check.
+						</p>
+
+						<p align="justify">
+						<strong>Placebo tests.</strong> The same synthetic control method is applied to every unit in
+						the donor pool, as if each one had been treated instead of the actual treated unit. This
+						produces a distribution of placebo "effects," estimated treatment effects for units that were
+						never actually treated. If the real treated unit's effect is large relative to this
+						distribution of placebo effects, that is evidence the estimated effect is not simply an
+						artifact of noise or a coincidentally good pre-period fit. Units with poor pre-treatment fit are
+						often excluded from the placebo comparison because an unreliable synthetic control cannot
+						produce a meaningful placebo estimate.
+						</p>
+
+						<hr />
+
+						<h2>Donor Pool Selection Matters as Much as the Weights</h2>
+
+						<p align="justify">
+						A common mistake is treating donor pool selection as a formality. In practice, which units
+						are eligible to enter the donor pool is itself a judgment call with real consequences. Donor
+						units should plausibly be unaffected by the treatment, similar enough in underlying structure
+						to be a meaningful comparison, and observed over a long enough pre-period to allow a
+						meaningful fit to be constructed. Including donor units that were themselves partially exposed
+						to the treatment, directly or through spillover, contaminates the counterfactual in much the
+						same way that using an already-treated unit as a DiD control does.
+						</p>
+
+						<hr />
+
+						<h2>Where the Method Runs Into Real Limits</h2>
+
+						<p align="justify">
+						Synthetic control is not a universal fix for missing comparison groups, and it carries its own
+						specific limitations worth knowing before relying on it.
+						</p>
+
+						<p align="justify">
+						<strong>The treated unit must be inside the donor pool's range, not an outlier.</strong> Because
+						weights are constrained to be non-negative and sum to one, the synthetic control can only
+						represent combinations that lie within the convex hull of the donor units. If the treated unit
+						is structurally extreme relative to every available donor, for example, an unusually large
+						market with no comparably sized peers, no combination of donors can replicate its
+						pre-intervention trajectory well, and the method will simply fail to produce a credible fit
+						rather than silently producing a misleading one.
+						</p>
+
+						<p align="justify">
+						<strong>A short pre-treatment period limits how much can be verified.</strong> The entire
+						credibility case rests on demonstrating a close pre-period fit. With only a few pre-treatment
+						periods available, it becomes hard to know whether a synthetic control that fits well is
+						genuinely well-matched or just fits well by chance.
+						</p>
+
+						<p align="justify">
+						<strong>Inference is different from standard regression.</strong>
+						Synthetic control does not naturally produce a standard error or a p-value in the way a
+						regression coefficient does. Credibility instead comes from the placebo distribution described
+						above, which is a valid but less familiar form of inference, and one that requires a donor pool
+						large enough to generate a meaningful distribution of placebo effects in the first place.
+						</p>
+
+						<p align="justify">
+						None of these limitations make the method unusable. They do mean that a synthetic control
+						estimate should be presented alongside its pre-period fit statistics and placebo results, not
+						as a standalone number, since the credibility of the estimate is inseparable from how well
+						those diagnostics hold up.
+						</p>
+
+						<hr />
+
+						<h2>Why This Matters Beyond the Method</h2>
+
+						<p align="justify">
+						Synthetic control is particularly useful in exactly the settings where economic consulting,
+						policy evaluation, and marketplace analysis most often operate: a single state passes a new
+						law, one large platform changes its policy, one firm undergoes a merger. These are precisely
+						the cases where a standard comparison group does not exist by default, and where a skeptical
+						stakeholder will reasonably ask why the chosen comparison is credible. That is ultimately why
+						synthetic control matters. The method is valuable not because it produces a number, but
+						because it produces a defensible counterfactual.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+						Abadie, A., Diamond, A., and Hainmueller, J. (2010). Synthetic Control Methods for
+						Comparative Case Studies: Estimating the Effect of California's Tobacco Control Program.
+						<em>Journal of the American Statistical Association</em>, 105(490), 493-505.
+						</p>
+
+						<p align="justify">
+						Abadie, A. (2021). Using Synthetic Controls: Feasibility, Data Requirements, and
+						Methodological Aspects. <em>Journal of Economic Literature</em>, 59(2), 391-425.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
