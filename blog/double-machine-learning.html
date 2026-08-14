@@ -1,0 +1,355 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Double Machine Learning: Prediction Is Not Causal Inference | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Machine learning can predict treatment and outcomes with real accuracy and still produce a biased treatment effect. This post explains regularization bias, the Frisch-Waugh-Lovell connection, and how Double Machine Learning recovers a credible causal estimate in high-dimensional settings." />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Double Machine Learning: Prediction Is Not Causal Inference</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							August 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Causal Inference &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							Machine learning can predict treatment and outcomes with real accuracy and still produce
+							a biased treatment effect. This post explains why, and walks through how Double Machine
+							Learning can recover a credible causal estimate in settings with many confounders and
+							complicated relationships.
+						</p>
+
+						<hr class="major" />
+
+						<h2>Why Prediction Accuracy Is Not the Same as Causal Credibility</h2>
+
+						<p align="justify">
+						Treatment is rarely randomly assigned in the real world. A pricing change, a policy rollout,
+						a marketing campaign, all of these are typically assigned based on factors that also affect
+						the outcome, the very definition of confounding. In settings with many confounders and
+						complicated, nonlinear relationships between them, the natural instinct is to reach for a
+						flexible machine learning model. That model can predict who receives treatment and what the
+						outcome will be with genuine accuracy.
+						</p>
+
+						<p align="justify">
+						That accuracy is not the same thing as a credible treatment effect. A model can achieve
+						excellent overall prediction performance while still producing a badly biased estimate of the
+						one coefficient that actually matters for a causal question. Understanding why requires
+						looking closely at what regularization actually does.
+						</p>
+
+						<hr />
+
+						<h2>Where Regularization Bias Comes From</h2>
+
+						<p align="justify">
+						Flexible prediction models, Lasso, ridge regression, random forests, gradient boosting, all
+						use some form of complexity control to avoid overfitting. In penalized regression methods
+						like Lasso and ridge specifically, this takes the form of shrinking coefficients toward zero
+						unless the data provides strong evidence they should be large. This is exactly what makes
+						these models good at prediction, it keeps them from chasing noise in the training data.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"That shrinkage does not know which coefficient matters for causal inference and
+								which one does not. It shrinks the treatment coefficient along with everything else."
+							</p>
+						</div>
+
+						<p align="justify">
+						If treatment is included directly in a penalized regression alongside every confounder, its
+						coefficient gets shrunk the same way every other coefficient does, whether or not shrinking
+						it improves prediction accuracy. The model has no way of knowing that one coefficient is what
+						you actually care about and the rest are just there to help predict the outcome. Everything
+						gets treated the same way, and the treatment effect ends up shrunk right along with it.
+						</p>
+
+						<p align="justify">
+						This is regularization bias, and it shows up whenever a treatment effect is estimated
+						directly inside a regularized model built for prediction rather than causal estimation. More
+						data or a different penalty will not fix this on its own, because the underlying problem
+						is not that the model predicts poorly. The problem is that prediction and causal estimation
+						are different goals, and a model built for one does not automatically deliver the other.
+						</p>
+
+						<hr />
+
+						<h2>The Fix: Two Prediction Steps, Then a Third Regression</h2>
+
+						<p align="justify">
+						Double Machine Learning, developed by Chernozhukov, Chetverikov, Demirer, Duflo, Hansen,
+						Newey, and Robins, solves this by separating prediction from causal estimation entirely,
+						rather than trying to do both in a single model. The "double" refers to two separate
+						prediction steps.
+						</p>
+
+						<p align="justify">
+						<strong>Step one.</strong> Use a flexible machine learning model to predict the outcome from
+						the confounders alone, without including treatment. Save the residuals, the part of the
+						outcome the confounders could not explain.
+						</p>
+
+						<p align="justify">
+						<strong>Step two.</strong> Use a second flexible machine learning model to predict treatment
+						from the same confounders. Save these residuals too, the part of treatment the confounders
+						could not explain.
+						</p>
+
+						<p align="justify">
+						<strong>Step three.</strong> Regress the outcome residuals on the treatment residuals. This
+						regression asks a narrow, specific question: does the part of treatment that has nothing to
+						do with the confounders explain the part of the outcome that has nothing to do with the
+						confounders. Under the appropriate identification assumptions, the coefficient from this
+						final regression estimates the treatment effect.
+						</p>
+
+						<p align="justify">
+						The two ML models in steps one and two exist for a narrow purpose, they are not the answer
+						themselves. Their whole job is to remove the predictable, confounded part of both treatment
+						and outcome, so that what remains in step three is the variation that genuinely reflects
+						treatment assignment, not the confounders driving both treatment and outcome at once.
+						</p>
+
+						<hr />
+
+						<h2>The Classical Connection: Frisch-Waugh-Lovell</h2>
+
+						<p align="justify">
+						This three-step procedure is not a new idea invented for the machine learning era. The
+						intuition behind it comes directly from the Frisch-Waugh-Lovell theorem, a classical result
+						from linear regression.
+						</p>
+
+						<p align="justify">
+						In its original linear form, FWL states that the coefficient on treatment in a multivariate
+						regression with confounders can be recovered exactly by first regressing the outcome on the
+						confounders to get residuals, regressing treatment on the confounders to get residuals, then
+						regressing the outcome residuals on the treatment residuals. The coefficient from that final
+						regression is identical to the treatment coefficient from the full multivariate regression.
+						</p>
+
+						<p align="justify">
+						DML applies this same partialling-out logic, but replaces the two linear regressions in the
+						first two steps with flexible machine learning models. This is what allows DML to handle
+						settings where the true relationship between confounders and treatment, or between
+						confounders and outcome, is nonlinear and would be poorly approximated by a simple linear
+						model.
+						</p>
+
+						<hr />
+
+						<h2>Why This Still Works With Imperfect Models</h2>
+
+						<p align="justify">
+						A natural question is why residualizing with imperfect machine learning models works at all.
+						The predictions from steps one and two are not perfect, they carry their own estimation
+						error. DML's construction is set up specifically so that small errors in those two prediction
+						steps only barely affect the final treatment effect estimate, rather than translating
+						directly into a proportionally large mistake. This property, called Neyman orthogonality, is
+						what makes it safe to use flexible, imperfect ML models for the two prediction steps, rather
+						than requiring them to be estimated with the same precision the final treatment effect
+						itself needs.
+						</p>
+
+						<hr />
+
+						<h2>Cross-Fitting: Why Held-Out Predictions Matter</h2>
+
+						<p align="justify">
+						One more ingredient makes DML work in practice: cross-fitting, also called sample splitting.
+						If a prediction model is used to generate residuals for the same data it was trained on, it
+						can overfit that data and introduce bias into the final treatment effect estimate.
+						</p>
+
+						<p align="justify">
+						Cross-fitting solves this by splitting the sample into folds, training the two prediction
+						models on one part of the data, and computing residuals on a different, held-out part. The
+						roles are then swapped and averaged across folds, so the residuals used in the final estimate
+						never come from a model that already saw that exact data during training.
+						</p>
+
+						<hr />
+
+						<h2>Identification Assumptions Still Apply</h2>
+
+						<p align="justify">
+						DML does not remove the need for standard causal identification assumptions, it changes how
+						flexibly those assumptions can be operationalized. The core requirement is still
+						unconfoundedness, that conditional on the observed confounders, treatment assignment is as
+						good as random. DML also requires sufficient overlap, that units with similar confounder
+						values have a genuine chance of receiving either treatment status, and that the two
+						prediction models are accurate enough for the orthogonality property described above to
+						hold in practice.
+						</p>
+
+						<p align="justify">
+						What DML changes is the burden placed on functional form. A researcher no longer needs to
+						correctly specify a linear or otherwise parametric relationship between the confounders and
+						treatment or outcome. The flexible ML models can capture that complexity. What DML cannot do
+						is recover a credible estimate if there are unobserved confounders driving both treatment and
+						outcome, that limitation is unrelated to model flexibility and applies to any observational
+						method.
+						</p>
+
+						<hr />
+
+						<h2>When DML Is the Right Tool, and When It Is Not</h2>
+
+						<p align="justify">
+						DML is best suited to settings with many observed confounders, complicated or nonlinear
+						relationships between those confounders and the treatment or outcome, and a genuine belief
+						that unconfoundedness holds once those confounders are accounted for. Marketplace pricing
+						decisions, where dozens of product, customer, and market-level variables jointly influence
+						both what price gets set and what demand results, are a natural fit.
+						</p>
+
+						<p align="justify">
+						DML is not the right tool when a cleaner identification strategy is available. If a natural
+						experiment, a policy discontinuity, or genuine randomization exists, those approaches remain
+						preferable, since they rely on a more transparent and directly verifiable identifying
+						assumption rather than the harder-to-verify claim that all relevant confounders have been
+						observed and included.
+						</p>
+
+						<hr />
+
+						<h2>The Actual Skill</h2>
+
+						<p align="justify">
+						Prediction accuracy alone was never going to be enough. A model can predict treatment and
+						outcome beautifully and still hand you a badly biased treatment effect if it was never built
+						to separate the two tasks. Knowing which tool fits which data structure, rather than
+						defaulting to whichever model predicts best, is what separates a credible causal estimate
+						from a plausible-looking one.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+						Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen, C., Newey, W., and Robins,
+						J. (2018). Double/Debiased Machine Learning for Treatment and Structural Parameters.
+						<em>The Econometrics Journal</em>, 21(1), C1-C68.
+						</p>
+
+						<p align="justify">
+						Frisch, R. and Waugh, F. V. (1933). Partial Time Regressions as Compared with Individual
+						Trends. <em>Econometrica</em>, 1(4), 387-401.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
