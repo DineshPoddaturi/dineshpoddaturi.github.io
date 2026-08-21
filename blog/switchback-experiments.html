@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Why A/B Tests Break in Marketplaces, and How Switchback Experiments Fix It | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="A simple A/B test assumes one user's treatment does not affect another user's outcome. In marketplaces with shared resources, that assumption can fail. This post explains the SUTVA violation behind that failure and how switchback experiments fix it, along with the tradeoffs the fix does not fully resolve." />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Why A/B Tests Break in Marketplaces, and How Switchback Experiments Fix It</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							August 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Causal Inference &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							A simple A/B test assumes one user's treatment does not affect another user's outcome. In a 
+							marketplace with shared resources, that assumption can fail. This post explains the violation 
+							behind that failure, how switchback experiments address it, and where the fix still leaves gaps 
+							worth knowing about.
+						</p>
+
+						<hr class="major" />
+
+						<h2>When Treating One User Changes Another User's Outcome</h2>
+
+						<p align="justify">
+						Say you run a surge pricing experiment on one group of users. The treatment does not just
+						change their behavior. It changes what happens to the control group too. In a two-sided
+						marketplace, supply is shared. If a price change pulls supply toward the treated group, that
+						supply is no longer available for the control group. The control group's experience changes,
+						not because of anything assigned to them, but because of something assigned to someone else.
+						</p>
+
+						<hr />
+
+						<h2>The Assumption That Breaks: SUTVA</h2>
+
+						<p align="justify">
+						This is a violation of SUTVA, the Stable Unit Treatment Value Assumption. SUTVA says a unit's
+						outcome should depend only on the treatment it receives, not on what treatment anyone else
+						receives. A simple A/B test relies on the assumption that SUTVA holds.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"The fix is not a bigger sample or a longer experiment. It is a different unit of
+								randomization."
+							</p>
+						</div>
+
+						<p align="justify">
+						In a marketplace with shared resources, SUTVA can fail by design, not by accident. Riders share
+						a pool of drivers. Buyers share a pool of sellers. Diners share a pool of delivery couriers.
+						Whenever two experimental units draw from the same underlying supply, treating one changes
+						what is available to the other. More sample size does not fix that. A longer run time does
+						not fix it either. The problem is structural interference between units, not a precision
+						problem that more data would solve.
+						</p>
+
+						<hr />
+
+						<h2>The Fix: Randomize the Market, Not the User</h2>
+
+						<p align="justify">
+						A switchback experiment solves this by changing the unit of randomization. Instead of
+						assigning treatment or control to individual users, you assign it to a time-region window, a
+						specific geography during a specific time period. Everyone interacting within that window, on
+						both sides of the market, experiences the same condition, either treatment or control. You
+						are not randomizing across people who share a supply pool anymore. You are randomizing across
+						the windows themselves. The interference that would otherwise contaminate the comparison
+						stays inside a single window instead of leaking between a treated group and a control group
+						operating in the same place at the same time.
+						</p>
+
+						<hr />
+
+						<h2>Contains the Interference, Does Not Fully Eliminate It</h2>
+
+						<p align="justify">
+						This is the caveat worth knowing before treating switchback as a complete fix. A switchback
+						design contains interference within each window, but it does not eliminate interference at
+						the boundaries between windows. Supply can still physically move. A driver near the edge of a
+						surging region can relocate toward it, which means a neighboring region assigned to control
+						can lose supply because of a treatment condition next door, not because of anything happening
+						inside its own window. Switchback does not eliminate interference. It contains it within the
+						experimental design.
+						</p>
+
+						<hr />
+
+						<h2>Choosing the Window Size: A Real Tradeoff</h2>
+
+						<p align="justify">
+						Window size is not a free parameter. Smaller windows give you more assignment opportunities and 
+						potentially more statistical power. But they also increase carryover, a treatment effect from one 
+						window can bleed into the next before the system resets. Larger windows reduce carryover, but they 
+						leave you with fewer assignment opportunities and potentially less power. There's no single right size. 
+						It depends on how fast the system responds and how much carryover you can live with given your sample.
+						</p>
+
+						<p align="justify">
+						A practical way to handle this is to build in washout periods, short buffer windows between a
+						treatment period and a control period, specifically to let carryover effects from the prior
+						assignment dissipate before the next period's outcomes are measured. Historical data on how
+						quickly the system responds to a similar change can help estimate how long that carryover
+						actually lasts, which in turn informs how short a window can safely be.
+						</p>
+
+						<hr />
+
+						<h2>Analyzing the Results</h2>
+
+						<p align="justify">
+						Switchback data has a panel structure, the same regions observed repeatedly over time. One
+						natural analysis approach is a panel regression with region and time fixed effects, with
+						inference accounting for the randomization scheme and the repeated observations within
+						regions over time. That's functionally related to the same underlying logic as
+						difference-in-differences, applied to a panel where treatment assignment switches back and
+						forth within each region over time rather than happening once. The dependence structure in
+						the data follows directly from what was actually randomized. The model needs to respect that
+						structure rather than treating individual observations as independent.
+						</p>
+
+						<hr />
+
+						<h2>Why This Matters Beyond the Design</h2>
+
+						<p align="justify">
+						A simple A/B test can still run and produce a number in a marketplace. That number just is
+						not credible once outcomes spill across units. Switchback experiments are not a workaround
+						for a minor inconvenience. They are the appropriate response to a genuine structural feature
+						of two-sided markets. The two sides depend on each other, and any credible experiment has to
+						account for that dependence rather than assume it away.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+						Bojinov, I., Simchi-Levi, D., and Zhao, J. (2023). Design and Analysis of Switchback
+						Experiments. <em>Management Science</em>, 69(7), 3759-3777.
+						</p>
+
+						<p align="justify">
+						Rubin, D. B. (1980). Randomization Analysis of Experimental Data: The Fisher Randomization
+						Test Comment. <em>Journal of the American Statistical Association</em>, 75(371), 591-593.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
