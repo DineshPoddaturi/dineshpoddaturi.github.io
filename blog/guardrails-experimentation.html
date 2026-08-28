@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Guardrails: Why Winning Experiments Still Fail | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="A primary metric moving in the right direction is necessary, but not sufficient. This post explains guardrail metrics, why marketplace experiments need them on both sides of the platform, and how to tell a real breach from statistical noise." />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Guardrails: Why Winning Experiments Still Fail</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							August 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Experimentation &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							A primary metric moving in the right direction is necessary, but not sufficient. This
+							post explains what guardrail metrics actually protect, why marketplace experiments need
+							them on both sides of the platform, and how to tell a real breach from statistical noise.
+						</p>
+
+						<hr class="major" />
+
+						<h2>Primary Metrics Measure Success. Guardrail Metrics Measure Safety.</h2>
+
+						<p align="justify">
+						A primary metric is what an experiment is trying to improve, order volume, revenue per
+						order, bookings. A guardrail metric is different in kind, not just in direction. It is
+						something you are actively trying not to break while the primary metric moves. Guardrails
+						exist because experiments have second-order effects that a primary metric was never built
+						to capture.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"Without a guardrail, an experiment is free to win however it can. With one, it has
+								to win without breaking something else."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>A Guardrail Breach Is a Decision Problem, Not Just a Statistical Result</h2>
+
+						<p align="justify">
+						A metric shifting slightly is not automatically a breach. A guardrail breach is movement
+						beyond a predefined threshold, and that threshold gets set in different ways depending on
+						what's being protected. Some guardrails are evaluated against statistical significance.
+						Others need to clear a business-relevant magnitude before anyone acts, even when the estimate
+						is statistically precise. And some hard constraints, safety issues, fraud, severe system
+						degradation, don't wait on a significance test at all, they follow a predefined rule and
+						trigger an immediate stop. Deciding which kind of threshold applies to which guardrail is
+						itself part of the experiment design, not an afterthought.
+						</p>
+
+						<hr />
+
+						<h2>In a Marketplace, the Other Side Is Part of the Experiment</h2>
+
+						<p align="justify">
+						In a two-sided marketplace, a guardrail breach frequently isn't an isolated symptom, it's the
+						visible trace of the whole system re-equilibrating. A discount increases demand, demand
+						pulls on supply, supply becomes constrained, fulfillment quality drops, and that shows up as
+						a guardrail breach. Nothing about that sequence is a side effect in the sense of being
+						unrelated to the treatment, it is the treatment propagating through the marketplace exactly
+						the way a real market would respond to a real price change.
+						</p>
+
+						<p align="justify">
+						In a marketplace, this is also a SUTVA problem. One unit's outcome can depend on another
+						unit's treatment, because treated demand changes the environment faced by untreated
+						suppliers. The guardrail breach is often where that interference actually becomes visible
+						in production data.
+						</p>
+
+						<hr />
+
+						<h2>Guardrails Are Noisy Too</h2>
+
+						<p align="justify">
+						A guardrail existing does not mean every flagged breach is real. Guardrails carry the same
+						statistical noise as any metric, and tracking several at once raises the odds that at least
+						one flags purely by chance, worth keeping in mind before treating every red flag as equally
+						credible. Long-term guardrails carry an extra risk: early movement can reverse over time,
+						particularly for retention proxies, so acting on an early, unstable read can trigger an
+						unnecessary rollback of something that would have recovered on its own. The discipline is
+						distinguishing signal from noise before making a stop decision, not reacting to the first
+						flag.
+						</p>
+
+						<hr />
+
+						<h2>An Experiment Can End Before Its Effects Do</h2>
+
+						<p align="justify">
+						Most experiments run for a window measured in days or weeks, and most guardrails, revenue
+						per order, cancellation rate, error rate, are built to move on that same timescale. That
+						leaves a real gap: effects that only surface weeks or months later, retention, lifetime
+						value, repeat purchase rate, can look completely clean during the entire experiment window
+						while quietly building toward a bad outcome. A discount that lifts bookings fifteen percent 
+						in a two-week test can look like an unambiguous win on the short-term guardrails, while 
+						repeat booking rate among discounted customers only starts dropping three months later, 
+						well after the experiment has shipped.
+						</p>
+
+						<hr />
+
+						<h2>The Decision Isn't Ship or Kill</h2>
+
+						<p align="justify">
+						Once the primary metric lift and the guardrail breaches are both evaluated, quantified in
+						comparable terms, lifetime value lost against revenue gained, there are usually several
+						reasonable paths, not just two. Ship, if the lift is real and the guardrails are clean.
+						Iterate, if the guardrails are soft constraints and a redesign is feasible. Roll out to
+						specific segments, if the impact is heterogeneous rather than uniform. Or kill it, if the
+						breach is severe and systemic. Experimentation isn't about finding wins, it's about making
+						informed decisions under constraints.
+						</p>
+
+						<hr />
+
+						<h2>Necessary, Not Sufficient</h2>
+
+						<p align="justify">
+						Guardrail metrics are not an afterthought bolted onto a successful experiment. They are how
+						a local improvement gets checked against the health of the whole system before it becomes a
+						permanent decision, and in a marketplace, that check has to include both sides of the
+						platform, or it isn't checking the thing most likely to break.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+						Kohavi, R., Tang, D., and Xu, Y. (2020). <em>Trustworthy Online Controlled Experiments: A
+						Practical Guide to A/B Testing</em>. Cambridge University Press.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
