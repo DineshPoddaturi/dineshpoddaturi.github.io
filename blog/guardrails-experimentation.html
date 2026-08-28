@@ -71,8 +71,8 @@
 						A metric shifting slightly is not automatically a breach. A guardrail breach is movement
 						beyond a predefined threshold, and that threshold gets set in different ways depending on
 						what's being protected. Some guardrails are evaluated against statistical significance.
-						Others need to clear a business-relevant magnitude before anyone acts, even when the estimate
-						is statistically precise. And some hard constraints, safety issues, fraud, severe system
+						Others need to clear a business-relevant magnitude before anyone acts, regardless of
+						statistical precision. And some hard constraints, safety issues, fraud, severe system
 						degradation, don't wait on a significance test at all, they follow a predefined rule and
 						trigger an immediate stop. Deciding which kind of threshold applies to which guardrail is
 						itself part of the experiment design, not an afterthought.
@@ -108,9 +108,8 @@
 						one flags purely by chance, worth keeping in mind before treating every red flag as equally
 						credible. Long-term guardrails carry an extra risk: early movement can reverse over time,
 						particularly for retention proxies, so acting on an early, unstable read can trigger an
-						unnecessary rollback of something that would have recovered on its own. The discipline is
-						distinguishing signal from noise before making a stop decision, not reacting to the first
-						flag.
+						unnecessary rollback of something that would have recovered on its own. The point is to
+						separate real signal from noise before making a stop decision, not react to the first flag.
 						</p>
 
 						<hr />
@@ -122,10 +121,10 @@
 						per order, cancellation rate, error rate, are built to move on that same timescale. That
 						leaves a real gap: effects that only surface weeks or months later, retention, lifetime
 						value, repeat purchase rate, can look completely clean during the entire experiment window
-						while quietly building toward a bad outcome. A discount that lifts bookings fifteen percent 
-						in a two-week test can look like an unambiguous win on the short-term guardrails, while 
-						repeat booking rate among discounted customers only starts dropping three months later, 
-						well after the experiment has shipped.
+						while quietly building toward a bad outcome. A discount that lifts bookings fifteen percent
+						in a two-week test can look like a clear win on the short-term guardrails, while repeat
+						booking rate among discounted customers only starts dropping three months later, well after
+						the experiment has already shipped.
 						</p>
 
 						<hr />
@@ -147,7 +146,7 @@
 						<h2>Necessary, Not Sufficient</h2>
 
 						<p align="justify">
-						Guardrail metrics are not an afterthought bolted onto a successful experiment. They are how
+						Guardrail metrics are not an afterthought added after a successful experiment. They are how
 						a local improvement gets checked against the health of the whole system before it becomes a
 						permanent decision, and in a marketplace, that check has to include both sides of the
 						platform, or it isn't checking the thing most likely to break.
