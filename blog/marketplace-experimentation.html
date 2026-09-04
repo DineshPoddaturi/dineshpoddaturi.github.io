@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Choosing the Right Experiment for Your Marketplace | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Deciding to run an experiment is the easy part. This post walks through how to choose the right randomization structure for a marketplace, based on where interference actually lives, and what to do when no randomized design has enough power." />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Choosing the Right Experiment for Your Marketplace</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							September 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Experimentation &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							Deciding to run an experiment is the easy part. This post walks through how the
+							structure of a marketplace, specifically where interference actually lives, should
+							determine the randomization design, and what to do when no randomized design provides
+							enough power to support a meaningful decision.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Decision Comes First, the Design Is Harder</h2>
+
+						<p align="justify">
+						You've decided to run an experiment. That decision was the easy part. The harder part is
+						choosing an experimental design that fits the marketplace you're actually studying.
+						Marketplaces almost always have interference, one person's treatment can affect another
+						person's outcome. Where you randomize matters because of this. The level of randomization
+						determines whether your treatment and control groups stay meaningfully distinct, or just
+						look clean on the surface.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"Containing interference is different from pretending it doesn't exist."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>The First Question: Can You Contain the Interference</h2>
+
+						<p align="justify">
+						Clustering at the region, network, or region-time level can reduce interference
+						substantially. None of these designs necessarily eliminate it. Some crossover between
+						conditions can still happen, a unit assigned to control ends up interacting with someone
+						in treatment anyway. The goal of clustering isn't zero contamination, it's shrinking
+						contamination to a level where the treatment contrast is still interpretable.
+						</p>
+
+						<p align="justify">
+						This connects to a broader idea in the causal inference literature sometimes called partial
+						interference. The standard setup behind many experiments, often expressed through SUTVA,
+						the Stable Unit Treatment Value Assumption, assumes that one unit's outcome does not depend
+						on the treatment assigned to anyone else. Partial interference relaxes that, it allows
+						interference to exist within a cluster but assumes it's negligible across clusters. That's
+						a weaker, more realistic assumption for a marketplace, and it's what actually makes
+						cluster-based experiments identifiable in practice.
+						</p>
+
+						<hr />
+
+						<h2>The Second Question: Where Does the Interaction Actually Happen</h2>
+
+						<p align="justify">
+						If interactions stay mostly within a region, region-level randomization is usually enough.
+						A driver and rider matching pool that rarely crosses city lines doesn't need anything more
+						complicated than randomizing at the city level.
+						</p>
+
+						<p align="justify">
+						If those interactions shift with supply and demand over time, region-level randomization
+						alone isn't enough. Consider a rideshare marketplace: drivers and riders interact within a
+						geographic market, but that market's equilibrium changes continuously throughout the day,
+						morning commute, midday dip, evening surge. A region assigned to treatment in the morning
+						and control in the evening would blur exactly the contrast you're trying to measure. This
+						is why region-time randomization, switchback design, exists as its own category, the
+						relevant unit of interference isn't the region alone, it's the region at a specific point
+						in time.
+						</p>
+
+						<p align="justify">
+						If interaction follows relationships rather than geography, a social network where treated
+						users affect their friends, or a marketplace where buyers and sellers have ongoing,
+						repeat relationships, network-level randomization is what actually captures it. Two users
+						on opposite sides of the country can still be tightly linked if one is a regular buyer from
+						the other's shop. Geography tells you nothing useful about that interference structure,
+						only the relationship graph does.
+						</p>
+
+						<hr />
+
+						<h2>The Practical Constraint: Statistical Power</h2>
+
+						<p align="justify">
+						Sometimes clustering leaves you with too few independent units to detect an effect
+						reliably, too few regions, too few distinct networks. Statistical power in a clustered
+						design depends heavily on the number of clusters, not just the number of individual units
+						inside them. Ten thousand users spread across only four regions does not give you the
+						same inferential information as ten thousand independently randomized users. For the
+						treatment contrast, you effectively have only four independent clusters.
+						</p>
+
+						<p align="justify">
+						In that case, forcing a randomized design doesn't solve the problem. It may simply produce
+						an estimate with too much uncertainty to support a meaningful decision, a confidence
+						interval wide enough to be useless, even if the point estimate looks encouraging.
+						</p>
+
+						<hr />
+
+						<h2>When Randomization Genuinely Isn't Feasible</h2>
+
+						<p align="justify">
+						Depending on the setting, a quasi-experimental approach such as difference-in-differences
+						or synthetic control may provide a more credible way to use the markets and time periods
+						you actually have. But that comes with its own identification assumptions, and they aren't
+						free.
+						</p>
+
+						<p align="justify">
+						Difference-in-differences requires parallel trends, that the treated and control markets
+						would have moved together absent the intervention, an assumption that has to be argued
+						for, not assumed by default. Synthetic control requires a good pre-period fit, that a
+						weighted combination of untreated markets can genuinely track the treated market's
+						pre-intervention trajectory closely enough to trust its projection forward. Neither method
+						is a free substitute for randomization, they're a different set of assumptions, chosen
+						because they're more defensible than trying to force a randomized design without enough
+						power to support it.
+						</p>
+
+						<hr />
+
+						<h2>The Real Decision Rule</h2>
+
+						<p align="justify">
+						Choosing to run an experiment is just the beginning. Designing one that fits how your
+						marketplace actually works, and what your data can actually support, is where the real
+						work starts. The correct experimental unit isn't the customer, the seller, the region, or
+						the network by convention or by default, it's whichever one actually contains where the
+						interference lives. When the unit doesn't match where the interference actually lives, a
+						statistically clean-looking experiment can still end up measuring something other than
+						what it appears to measure.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+						Eckles, D., Karrer, B., and Bakshy, E. (2017). Design and Analysis of Experiments in
+						Networks: Reducing Bias from Interference. <em>Journal of Causal Inference</em>, 5(1).
+						</p>
+
+						<p align="justify">
+						Abadie, A. (2021). Using Synthetic Controls: Feasibility, Data Requirements, and
+						Methodological Aspects. <em>Journal of Economic Literature</em>, 59(2), 391-425.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
