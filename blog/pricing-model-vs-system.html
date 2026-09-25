@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>A Pricing Model Is Not a Pricing System | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="A pricing model gives you an estimate. A pricing system is what puts that estimate to work. This post walks through everything that lives between the two: the pipeline, the engineering constraints, deployment, monitoring, and the feedback loop back into the model." />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>A Pricing Model Is Not a Pricing System</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							September 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Pricing Systems &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							A pricing model gives you an estimate. A pricing system is what puts that estimate to
+							work. This post walks through everything that lives between the two.
+						</p>
+
+						<hr class="major" />
+
+						<h2>What a Model Actually Gives You</h2>
+
+						<p align="justify">
+						A pricing model gives you an estimate. Ideally, it's unbiased and low variance. You run
+						the model, get a number, and it looks clean in the output. That's a real, necessary piece
+						of work. It's also a small fraction of what it takes to actually price something in
+						production.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"And then come all the things that don't show up in the regression output."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>The System the Model Lives Inside</h2>
+
+						<p align="justify">
+						A system starts with a consistent data pipeline, then the model, then an optimization
+						function that turns the estimate into an actual decision. None of that is visible in a
+						regression summary, and all of it matters if the goal is to put the pricing model into
+						production.
+						</p>
+
+						<div style="text-align: center; margin: 2rem 0;">
+							<img src="Plots/pricing-flowchart.png" alt="Diagram: Data Pipeline leads to Model, then Optimization Function, then Business and Engineering Constraints, then Deployment, then Monitoring and Experiment Framework, with a feedback loop back to the Model." style="width: 100%; max-width: 700px; height: auto;" />
+						</div>
+
+						<hr />
+
+						<h2>Two Different Kinds of Constraints</h2>
+
+						<p align="justify">
+						Business constraints are the ones most people think of first: price floors, contractual
+						minimums, brand positioning rules, competitive limits. A model that ignores these can
+						produce a mathematically defensible price that's operationally impossible to actually
+						charge.
+						</p>
+
+						<p align="justify">
+						Engineering constraints are just as real, and easier to overlook from the analysis side.
+						Latency matters because a price that takes too long to compute arrives after the
+						customer has already moved on. Reliability matters because the system has to return a
+						real number every time, an error or a blank isn't a graceful failure, it's a lost
+						transaction. Scalability matters because a pricing function that works cleanly on a test
+						set of a thousand rows can behave very differently at the actual volume of requests a
+						live system receives. A model that's statistically excellent but violates any of these
+						doesn't get deployed, or gets deployed and quietly fails.
+						</p>
+
+						<hr />
+
+						<h2>Deployment Is a Beginning, Not an End</h2>
+
+						<p align="justify">
+						Once a pricing system is live, monitoring comes next: cancellation rates, satisfaction,
+						fulfillment, retention. These aren't afterthoughts. They're how you know whether the
+						model's assumptions are still holding once it's actually operating in the world it was
+						built to affect. When something looks off, the system needs an experiment framework
+						already in place, ready to test a hypothesis rather than needing to be built from scratch
+						under pressure.
+						</p>
+
+						<hr />
+
+						<h2>The Feedback Loop</h2>
+
+						<p align="justify">
+						What gets learned from monitoring and experimentation feeds back into the system.
+						Sometimes that means correcting bias in the model itself, the estimate was wrong in some
+						specific, identifiable way. Sometimes the problem is somewhere else entirely, in the data
+						pipeline, in a constraint that was mis-specified, in an engineering assumption that didn't
+						hold at scale. Knowing which one it is requires the monitoring and the experiment
+						infrastructure to already exist, not to be assembled after something has already gone
+						wrong.
+						</p>
+
+						<hr />
+
+						<h2>The Actual Point</h2>
+
+						<p align="justify">
+						A pricing model gives you an estimate.<br/>
+						A pricing system is what puts that estimate to work.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
