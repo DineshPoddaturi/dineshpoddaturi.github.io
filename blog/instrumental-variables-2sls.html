@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Instrumental Variables and 2SLS: Why OLS Is Biased When Price Is Endogenous | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="An OLS price coefficient can look statistically clean and still be wrong if price is endogenous. This post explains why that happens, what a valid instrument needs to satisfy, and how two-stage least squares uses a valid instrument to identify the causal effect." />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Instrumental Variables and 2SLS: Why OLS Is Biased When Price Is Endogenous</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							October 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Econometrics / Causal Inference &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							An OLS regression of demand on price can produce a clean, statistically significant coefficient
+							that is still wrong. This post explains why price endogeneity causes that, what a valid
+							instrument actually has to satisfy, and how two-stage least squares uses a valid instrument
+							to identify the causal effect.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Core Problem: Endogenous Price</h2>
+
+						<p align="justify">
+						A regression of demand on price assumes that price is uncorrelated with whatever is left in the
+						error term, the part of demand the model cannot explain. In many pricing and demand settings,
+						that assumption fails. Price is often correlated with something the researcher cannot observe
+						but the firm can.
+						</p>
+
+						<p align="justify">
+						Consider product quality. A firm knows how good its product actually is. A researcher estimating
+						demand from transaction data typically does not observe quality directly. It does not show up as
+						a column in the dataset. If the firm sets a higher price for a higher-quality product, then in
+						the data, high price and high demand move together for a reason that has nothing to do with how
+						consumers respond to price itself. They move together because both are driven by the same
+						unobserved quality.
+						</p>
+
+						<p align="justify">
+						Ordinary least squares cannot tell these two sources of correlation apart. It estimates one
+						coefficient on price, and that coefficient absorbs both the true causal effect of price on
+						demand and the correlation between price and the unobserved quality term. The result is an
+						estimate that no longer isolates how consumers actually respond to price changes. This is what
+						endogeneity means: the regressor of interest is correlated with the error term, and the
+						exogeneity assumption OLS depends on no longer holds.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"The coefficient looked clean. It was also wrong, because price was endogenous."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>What an Instrument Actually Needs to Satisfy</h2>
+
+						<p align="justify">
+						An instrument addresses the endogeneity problem by introducing a second source of variation in
+						price, one that is unrelated to the unobserved demand shock. For a variable to work as a valid
+						instrument, it has to satisfy two separate conditions.
+						</p>
+
+						<p align="justify">
+						The first is relevance. The instrument has to be correlated with price. This is a condition
+						about predictive power, and it can be checked directly in the data. The first-stage regression of price on the candidate instrument and the other exogenous
+						controls reveals whether the instrument provides enough independent variation in price to be
+						useful.
+						</p>
+
+						<p align="justify">
+						The second is the exclusion restriction. The instrument must affect demand only through its
+						effect on price, not through any other channel. Unlike relevance, exclusion cannot be verified
+						directly in the data. There is no test that proves an instrument satisfies exclusion. It has to
+						be argued, based on institutional knowledge of how the instrument operates in the
+						setting being studied. A classic example is a cost shifter, something like an input cost that
+						changes what a firm charges, without being tied to why consumers want more or less of the
+						product in a given period. The argument for exclusion has to explain specifically why that cost
+						shifter has no direct channel into demand other than through price.
+						</p>
+
+						<p align="justify">
+						A credible exclusion argument is harder to make, and it is the part that gets
+						challenged.
+						</p>
+
+						<hr />
+
+						<h2>How Two-Stage Least Squares Recovers the Effect</h2>
+
+						<p align="justify">
+						Once a valid instrument is in hand, two-stage least squares, 2SLS, is the standard way to use
+						it.
+						</p>
+
+						<p align="justify">
+						The first stage regresses price on the instrument, along with any other exogenous controls
+						already in the model. This produces a predicted value of price, the portion of price explained
+						by the instrument and the model's other exogenous variables. Because the instrument satisfies exclusion, this predicted price is
+						no longer correlated with the unobserved demand shock that was contaminating the original OLS
+						estimate.
+						</p>
+
+						<p align="justify">
+						The second stage regresses demand on this predicted price, rather than on the actual observed
+						price. The resulting coefficient reflects the variation in price explained by the instrument
+						and the model's other exogenous variables. Under the exclusion restriction, that variation has
+						nothing to do with the firm's private information about quality or any other unobserved demand
+						shifter. Under the relevance and exclusion assumptions, that coefficient is a consistent
+						estimate of the causal effect of price on demand.
+						</p>
+
+						<p align="justify">
+						The mechanics are straightforward. The identifying assumptions behind them are not. Two-stage
+						least squares does not make an invalid instrument valid. It uses whatever variation in price
+						the instrument provides, and the quality of the final estimate depends entirely on whether that
+						variation really is exogenous.
+						</p>
+
+						<hr />
+
+						<h2>When This Breaks: Weak Instruments</h2>
+
+						<p align="justify">
+						An instrument that is only weakly correlated with price creates a different problem. If the
+						first-stage correlation is small, the predicted price used in the second stage carries very
+						little real variation, and very little information to work with. The resulting IV estimate can
+						be imprecise, and in finite samples, a weak instrument can produce an estimate biased in the
+						same direction as OLS, sometimes even more severely.
+						</p>
+
+						<p align="justify">
+						This is not a hypothetical concern. It is common enough that checking instrument strength,
+						usually through the first-stage F-statistic, is a standard step before reporting an IV result.
+						An instrument that satisfies relevance and exclusion in principle but barely moves price in
+						practice can still leave you with an estimate you cannot trust.
+						</p>
+
+						<hr />
+
+						<h2>Why This Matters Beyond the Regression</h2>
+
+						<p align="justify">
+						In applied demand estimation, the choice of instrument is rarely a settled, mechanical step. It
+						is usually the most contested part of the analysis. A strong first-stage F-statistic
+						demonstrates relevance, but it says nothing about exclusion. The harder, more important task is
+						explaining why the instrument has no direct channel into demand other than through price, and
+						defending that argument against the specific institutional details of the market being
+						studied.
+						</p>
+
+						<p align="justify">
+						A regression that reports a statistically significant price coefficient without that argument
+						has not actually solved the endogeneity problem. It has only produced a number that looks
+						resolved.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+						Angrist, J. and Pischke, J.S. (2009). <em>Mostly Harmless Econometrics: An Empiricist's
+						Companion.</em> Princeton University Press. Standard reference for identification strategies
+						including instrumental variables.
+						</p>
+
+						<p align="justify">
+						Berry, S. (1994). Estimating Discrete-Choice Models of Product Differentiation. <em>RAND
+						Journal of Economics</em>, 25(2), 242&ndash;262. A foundational reference for the unobserved
+						product-quality mechanism behind price endogeneity in differentiated-product demand
+						estimation.
+						</p>
+
+						<p align="justify">
+						Stock, J.H. and Yogo, M. (2005). Testing for Weak Instruments in Linear IV Regression. In
+						<em>Identification and Inference for Econometric Models.</em> Cambridge University Press. The
+						standard diagnostic for instrument strength.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
