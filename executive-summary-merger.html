@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+		<title>Executive Summary: JetBlue-Spirit Merger Simulation | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="A short summary of a structural BLP demand estimation and merger simulation of the blocked JetBlue-Spirit merger. Key findings on price effects, consumer welfare, identification limits, and scope." />
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			.summary-note {
+				color: #888;
+				font-size: 0.85rem;
+				font-style: italic;
+				margin-bottom: 2rem;
+			}
+			.callout {
+				background: #f8f8f8;
+				padding: 1.5rem;
+				border-left: 4px solid #f56a6a;
+				margin: 2rem 0;
+			}
+			.callout p {
+				margin: 0;
+				font-style: italic;
+			}
+			.finding-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1.5rem;
+				margin: 1.5rem 0;
+			}
+			.finding-box {
+				background: #f8f8f8;
+				padding: 1.25rem;
+				border-top: 3px solid #f56a6a;
+			}
+			.finding-box h4 {
+				margin: 0 0 0.5rem 0;
+				font-size: 0.95rem;
+				color: #3d4449;
+			}
+			.finding-box p {
+				margin: 0;
+				font-size: 0.9rem;
+			}
+			.stat-highlight {
+				font-size: 1.4rem;
+				font-weight: bold;
+				color: #f56a6a;
+				display: block;
+				margin-bottom: 0.25rem;
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 1.5rem 0;
+				font-size: 0.9rem;
+			}
+			table th {
+				background: #f56a6a;
+				color: white;
+				padding: 0.6rem 1rem;
+				text-align: left;
+			}
+			table td {
+				padding: 0.6rem 1rem;
+				border-bottom: 1px solid #e0e0e0;
+			}
+			table tr:nth-child(even) td {
+				background: #f8f8f8;
+			}
+			.scope {
+				padding: 0.75rem 1rem;
+				border-left: 3px solid #e0e0e0;
+				margin: 0.75rem 0;
+			}
+			.scope strong {
+				color: #f56a6a;
+			}
+			@media (max-width: 768px) {
+				.finding-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+		<div id="wrapper">
+			<div id="main">
+				<div class="inner">
+					<section>
+						<header class="main">
+							<h1>Estimating the Price Effects of the Blocked JetBlue-Spirit Merger</h1>
+						</header>
+						<p class="summary-note">
+							Executive Summary (5-minute read) &nbsp;|&nbsp; October 2026 &nbsp;|&nbsp;
+							<a href="research.html#merger-analysis">Full paper available here</a>
+						</p>
+						<p align="justify"> <strong>In a structural model calibrated to public case data, common ownership raises Spirit's average price by about 52 percent and JetBlue's by about 18 percent on the three routes with real fare data.</strong> </p>
+
+						<p align="justify">This is a structural demonstration, built on a constructed market-level dataset calibrated wherever possible to public case and government information. It carries an independent BLP demand model through to the question the government raised, what the merger would have done to prices and consumers. It is not a replication of the government's own analysis, which relied on data that is not public. The full 64-page paper with methodology, data construction, and technical appendices is available on the <a href="research.html#merger-analysis">research page</a>.</p>
+
+						<p class="summary-note">For competition economics, antitrust, and pricing teams evaluating structural merger analysis.</p>
+						<hr class="major" />
+
+						<h2>The Question</h2>
+						<p align="justify">On January 16, 2024, a federal court blocked JetBlue's acquisition of Spirit Airlines, agreeing with the Department
+						of Justice that the deal would eliminate Spirit as an independent ultra-low-cost carrier (ULCC). The government's claim is a
+						unilateral effects theory. After the merger, some of the customers JetBlue loses when it raises price would switch to Spirit,
+						a product the combined firm now owns, so the diversion is no longer entirely lost. That weakens the incentive to keep prices low,
+						especially on routes where Spirit is a close substitute.</p>
+						<p align="justify">Testing that theory requires a demand model that lets products substitute with each other in a product-specific way,
+						not one that assumes every customer who leaves a product is equally likely to switch to every other. That is why the analysis
+						uses a random-coefficients (BLP) specification.</p>
+						<hr />
+
+						<h2>How the Analysis Is Built</h2>
+						<div class="finding-grid">
+							<div class="finding-box">
+								<h4>Data</h4>
+								<span class="stat-highlight">492 markets</span>
+								<p>41 routes over 12 quarters (2022 Q1 to 2024 Q4). Three routes named in the case record use real JetBlue and Spirit fares and real fuel costs. The other 38 are constructed.</p>
+							</div>
+							<div class="finding-box">
+								<h4>Known data-generating process</h4>
+								<span class="stat-highlight">Checked against truth</span>
+								<p>Because the true parameters are known by construction, the estimated parameters can be compared with their true values, a diagnostic that is not available with real market data.</p>
+							</div>
+						</div>
+						<p align="justify"><strong>Method.</strong> A BLP random-coefficients discrete choice model, estimated by two-step efficient GMM. Price is
+						endogenous by construction, so it is instrumented with fuel price deviations, distance, their interaction, and a count of rival ULCC
+						products. Marginal costs are then recovered from observed prices and elasticities, and the pre-merger equilibrium solver is validated by
+						reproducing observed prices to within 4.55e-13. Post-merger prices are the Bertrand-Nash equilibrium when JetBlue and Spirit are
+						commonly owned. All 72 equilibrium solves (3 routes, 12 quarters, 2 ownership scenarios) were independently audited, with 0 failures.</p>
+						<hr />
+
+						<h2>Key Results</h2>
+						<p align="justify">Averaged across the 36 route-quarter observations on the three anchor routes:</p>
+						<table>
+							<tr>
+								<th>Carrier</th>
+								<th>Average post-merger price change</th>
+							</tr>
+							<tr>
+								<td>Spirit</td>
+								<td>+51.6%</td>
+							</tr>
+							<tr>
+								<td>JetBlue</td>
+								<td>+18.0%</td>
+							</tr>
+							<tr>
+								<td>Frontier-type ULCC</td>
+								<td>+8.5%</td>
+							</tr>
+							<tr>
+								<td>Legacy carrier</td>
+								<td>+0.4%</td>
+							</tr>
+						</table>
+						<p align="justify">Non-merging rivals also see smaller increases. This is the umbrella effect: once the merging firms raise price, rival
+						products become relatively more attractive and rivals can raise theirs. The standard Farrell-Shapiro upward pricing pressure formula,
+						computed without solving for equilibrium, points in the same direction at a comparable magnitude (for Spirit on BOS-FLL in the first
+						quarter, $54.73 from the formula against $52.36 from the full simulation).</p>
+						<div class="callout">
+							<p>Spirit's 51.6 percent is partly arithmetic. Spirit has the lowest fare on every anchor route, so a given dollar increase is a larger
+							percentage there. Its average increase also ranges from 28.7 percent on LAX-FLL to 70.9 percent on BOS-MIA.</p>
+						</div>
+						<h3>Consumer Welfare</h3>
+						<p align="justify">Using the standard compensating variation formula for logit-family demand models, the estimated per-capita welfare
+						loss is $31.58, and the annualized consumer welfare loss across the same three anchor routes is approximately <strong>$64.1 million</strong>.
+						This figure is not extrapolated to the government's full set of more than 150 presumptively anticompetitive routes. The three anchor
+						routes were chosen for their real, verified data, not as a representative sample.</p>
+						<h3>Removing Spirit With Ownership Held Fixed</h3>
+						<p align="justify">A separate counterfactual removes Spirit from a market and leaves every other carrier's ownership unchanged. Surviving carriers' own-price
+						elasticities move toward zero (about 19 percent for the Frontier-type ULCC, 12 percent for JetBlue, and 1 percent for the legacy carrier),
+						and cross-price elasticities among them rise. This is the direct sense in which losing Spirit loosens competitive constraint.</p>
+						<hr />
+
+						<h2>Where the Model Falls Short</h2>
+						<p align="justify">The estimation recovers the spread of price sensitivity across consumers well (within 5 percent of its true value); mean price sensitivity is less accurate, as discussed below. It does
+						not recover the spread in consumer taste for ULCCs specifically. That estimate is effectively 0 against a true value of 1.0. A grid search
+						over the estimation objective shows the spread of price sensitivity has a clear interior minimum at its true value, while ULCC taste has no interior
+						minimum anywhere on the grid. A likely reason is that the available instruments shift price but not ULCC taste independently of it, and the
+						analysis has no individual-level data of the kind applied BLP work normally uses for this.</p>
+						<p align="justify">The failure does not stay contained. The mean price-sensitivity estimate is about 12 percent above its true value in the full
+						estimation, against about 4 percent when the ULCC taste spread is supplied at its true value. A leakage channel is confirmed empirically,
+						though the paper does not decompose how much of the 12 percent it explains. Diversion ratios are affected directly:</p>
+						<table>
+							<tr>
+								<th>Diversion from Spirit to</th>
+								<th>BOS-FLL (est. / true)</th>
+								<th>BOS-MIA (est. / true)</th>
+								<th>LAX-FLL (est. / true)</th>
+							</tr>
+							<tr>
+								<td>Frontier-type ULCC</td>
+								<td>34.9% / 42.0%</td>
+								<td>36.1% / 42.4%</td>
+								<td>52.0% / 57.1%</td>
+							</tr>
+							<tr>
+								<td>JetBlue</td>
+								<td>44.2% / 39.1%</td>
+								<td>48.1% / 43.5%</td>
+								<td>29.6% / 26.5%</td>
+							</tr>
+						</table>
+						<div class="callout">
+							<p>Diversion to the rival ULCC is understated by roughly 5 to 7 percentage points on every anchor route. The price and welfare figures are built
+							from the same demand system, so they can be expected to inherit some distortion, but no oracle merger simulation was run to size it.</p>
+						</div>
+						<p align="justify">The Spirit-exit ranking and the merger's upward pricing pressure ranking are the two results least affected, since both are driven
+						mainly by price proximity, a channel carried by the well-identified price sensitivity spread.</p>
+						<hr />
+
+						<h2>What the Analysis Does Not Claim</h2>
+						<div class="scope">
+							<strong>Narrow real-data footprint.</strong> Only 3 of 41 routes have real fare data. Every result that depends on the anchor routes applies to
+							those routes, not to the full government route set.
+						</div>
+						<div class="scope">
+							<strong>Upward pricing pressure only.</strong> Product characteristics are held fixed and no merger-specific efficiencies are modeled. This is the
+							standard zero-efficiencies baseline, not a claim that mergers never create cost savings.
+						</div>
+						<div class="scope">
+							<strong>Retrofit and product elimination not modeled.</strong> The government's separate allegation that JetBlue would reconfigure Spirit's cabins
+							is not captured here. The price and welfare figures are the modeled upward pricing pressure component of potential harm, not an estimate of its total.
+						</div>
+						<hr />
+
+						<h2>Postscript: Spirit's 2026 Exit</h2>
+						<p align="justify">Spirit ceased operations in May 2026 after a second bankruptcy filing. That was a financial collapse, not an acquisition. It removes
+						Spirit as a competitor without changing any firm's pricing incentives through ownership, so it is a different economic event from the merger
+						counterfactual and should not be read as validation of anything modeled here. It does create an opportunity for future work, since the Spirit-exit
+						predictions about elasticities could be checked against real post-exit market data.</p>
+						<hr />
+
+						<h2>Bottom Line</h2>
+						<p align="justify">The contribution is not a new econometric method. It is a complete application of one. It defines a real market from public case
+						and government data, constructs data responsibly where real data does not exist, specifies a structural model suited to the question, finds and
+						discloses where its identification falls short, and carries the results that hold up through to a counterfactual decision that matters.</p>
+						<p align="justify">The natural extension is individual-level micro-moments data, which the applied BLP literature typically uses to identify
+						taste heterogeneity of exactly the kind this dataset could not support.</p>
+						<hr />
+
+					</section>
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing • Industrial Organization • Causal Inference</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="index.html">Homepage</a></li>
+							<li><a href="research.html">Research &amp; Writing</a></li>
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="CV.html">CV</a></li>
+							<li><a href="about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+				</div>
+			</div>
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>
