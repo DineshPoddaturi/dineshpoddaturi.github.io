@@ -17,7 +17,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/png" href="favicon.png" />
-		<meta name="description" content="Research and writing by Dinesh R. Poddaturi. Working paper on profit-aware pricing in two-sided marketplaces, open source marketplace experimentation code, and doctoral dissertation research." />
+		<meta name="description" content="Research and writing by Dinesh R. Poddaturi. Working papers on profit-aware pricing in two-sided marketplaces and the price effects of the blocked JetBlue-Spirit merger, open source marketplace experimentation code, and doctoral dissertation research." />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body class="is-preload">
@@ -32,18 +32,18 @@
 							<h1>Research and Writing</h1>
 						</header>
 
-						<p align="justify">This page collects my working paper, dissertation research, and open source work. 
-						For shorter writing on applied economics, causal inference, pricing strategy, and marketplace economics, 
+						<p align="justify">This page collects my working papers, dissertation research, and open source work.
+						For shorter writing on applied economics, causal inference, pricing strategy, industrial organization, and marketplace economics, 
 						visit the <a href="blog.html">blog</a>.</p>
 
 						<hr class="major" />
 
-						<!-- Working Paper -->
+						<!-- Working Papers -->
 						<header>
-							<h2>Working Paper</h2>
+							<h2>Working Papers</h2>
 						</header>
 
-						<div style="background: #f8f8f8;
+						<div id="profit-aware-pricing" style="background: #f8f8f8;
 									border-left: 4px solid #f56a6a;
 									padding: 1.5rem 2rem;
 									margin-bottom: 2rem;">
@@ -56,7 +56,7 @@
 							<p align="justify">This paper develops an empirical pricing
 							framework for two-sided e-commerce marketplaces,
 							combining demand estimation, profit optimization under
-							cost uncertainty, customer lifetime value modeling, customer propensity estimation, and sequential
+							cost uncertainty, customer lifetime value modeling, and sequential
 							purchase pattern analysis. Applied to 110,840 transactions across
 							71 product categories from the Olist Brazilian marketplace, the
 							analysis demonstrates that revenue maximization and profit
@@ -79,6 +79,48 @@
 							</ul>
 							<p style="color: #888; font-size: 0.85rem; margin-top: 1rem;">
 							<em>Keywords: Dynamic Pricing, Marketplace Economics, Causal Inference, Revenue Management, Customer Lifetime Value, Price Elasticity, Two-Sided Markets, Profit Optimization, Demand Estimation.</em>
+							</p>
+						</div>
+
+						<!-- Merger Analysis Working Paper -->
+						<div id="merger-analysis" style="background: #f8f8f8;
+									border-left: 4px solid #f56a6a;
+									padding: 1.5rem 2rem;
+									margin-bottom: 2rem;">
+							<h3 style="margin-top: 0;">Estimating the Price Effects of the Blocked
+							JetBlue-Spirit Merger: A BLP Demand Estimation and Merger Simulation</h3>
+							<p style="color: #888; font-size: 0.9rem;">
+								Dinesh R Poddaturi &nbsp;|&nbsp; 2026
+							</p>
+							<p align="justify">In January 2024, a federal court blocked JetBlue's proposed
+							acquisition of Spirit Airlines, agreeing with the Department of Justice that the merger
+							would eliminate Spirit as an independent ultra-low-cost competitor. This paper builds an
+							independent structural analysis of the same underlying economic question, what the merger
+							would have done to prices and consumers. Because no public dataset contains individual
+							airline booking records, the analysis uses a constructed market-level panel of 41 routes
+							over 12 quarters (492 route-quarter markets). Three routes named in the case record are
+							anchored to real JetBlue and Spirit fares from the BTS Consumer Airfare Report and to real
+							jet fuel costs, and the remaining 38 routes are constructed, with route composition calibrated to the government's own
+							breakdown. The paper estimates a BLP random-coefficients demand model by two-step efficient GMM
+							and simulates Bertrand-Nash pricing under common ownership. On the three anchor routes, the
+							simulation implies average post-merger price increases of about 52 percent for Spirit and
+							18 percent for JetBlue, and a modeled annualized consumer welfare loss of about $64.1
+							million. Because the data-generating process is known, the estimated parameters can be
+							evaluated against their true values. The spread of price sensitivity across consumers is recovered well,
+							but heterogeneity in consumer taste for ultra-low-cost carriers is not identified. The
+							paper diagnoses the gap with a grid search and shows that it leaks into other estimates, including a mean price-sensitivity estimate about 12 percent above its true value (about 4 percent when the true taste spread is supplied) and diversion ratios that understate diversion to the rival ultra-low-cost carrier by roughly 5 to 7 percentage points.
+							Results are scoped to the three
+							verified routes and to upward pricing pressure; they are not extrapolated to the
+							government's full set of routes.</p>
+							<ul class="actions" style="margin-bottom: 0;">
+								<li><a href="papers/Estimating-the-Price-Effects-of-the-Blocked-JetBlue-Spirit-Merger.pdf"
+								   class="button primary" target="_blank">
+								   Download PDF</a></li>
+								<li><a href="executive-summary-merger.html" class="button">Executive Summary</a></li>
+								<!-- Add an SSRN button here once the paper is approved on SSRN -->
+							</ul>
+							<p style="color: #888; font-size: 0.85rem; margin-top: 1rem;">
+							<em>Keywords: Merger Simulation, BLP Demand Estimation, Antitrust, Unilateral Effects, Industrial Organization, Random-Coefficients Logit, Counterfactual Analysis, Consumer Welfare, Airline Competition.</em>
 							</p>
 						</div>
 
@@ -111,7 +153,7 @@
 						developed dynamic structural economic models of the U.S. beef cattle
 						industry, with applications to disease outbreak scenarios and
 						agricultural policy analysis. The work focuses on dynamic optimization,
-						structural estimation, and demand systems — methods that transfer
+						structural estimation, and demand systems, methods that transfer
 						directly to pricing, industrial organization, and empirical market analysis.
 						Co-authored with Chad E. Hart and Lee L. Schulz.</p>
 
@@ -202,7 +244,7 @@
 						<p style="font-size: 0.8rem;
 								  color: #888;
 								  margin-top: -0.5rem;">Applied Economist<br/>
-								  Causal Inference • Pricing</p>
+								  Pricing • Industrial Organization • Causal Inference</p>
 					</div>
 
 					<nav id="menu">
