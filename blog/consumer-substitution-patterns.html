@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Why Consumers Don't Treat Every Product as a Substitute | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="An elasticity tells you how many buyers a product loses when its price rises. It does not tell you where they go. This post explains why that answer is rarely to everything else in proportion to size, what a basic logit assumes about it, and how modeling differences across consumers produces more realistic substitution." />
+		<meta property="og:title" content="Why Consumers Don't Treat Every Product as a Substitute" />
+		<meta property="og:description" content="An elasticity tells you how many buyers a product loses when its price rises. It does not tell you where they go. This post explains why that answer is rarely to everything else in proportion to size, what a basic logit assumes about it, and how modeling differences across consumers produces more realistic substitution." />
+		<meta property="og:image" content="https://dineshpoddaturi.github.io/images/MyImage6.png" />
+		<meta property="og:url" content="https://dineshpoddaturi.github.io/blog/consumer-substitution-patterns.html" />
+		<meta property="og:type" content="article" />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Why Consumers Don't Treat Every Product as a Substitute</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							October 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Industrial Organization &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							An elasticity tells you how many buyers a product loses when its price rises. It does not tell you
+							where they go. This post explains why that answer is rarely &ldquo;to everything else in proportion
+							to size,&rdquo; what a basic logit assumes about it, and how modeling differences across consumers
+							produces more realistic substitution.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Core Problem: Where Do Buyers Go?</h2>
+
+						<p align="justify">
+							When a product's price rises, two questions follow. The first is how many buyers it loses. An
+							elasticity answers that. It measures how much the quantity demanded of that product falls for a given
+							percentage increase in its price.
+						</p>
+
+						<p align="justify">
+							The second question is where those buyers go. An elasticity says nothing about it. A diversion
+							ratio does. It is the share of the product's lost sales that each alternative picks up, and the shares
+							add up to everything lost, including buyers who stop buying altogether.
+						</p>
+
+						<p align="justify">
+							Buyers tend to move to the closest alternative, or to something cheaper. The simplest demand
+							models do not build that in.
+						</p>
+
+						<hr />
+
+						<h2>What a Basic Logit Assumes</h2>
+
+						<p align="justify">
+							The simplest demand model, a basic logit, builds in an assumption called independence of
+							irrelevant alternatives, or IIA. The relative odds of choosing one product over another do not change
+							when a third product is added or removed, however similar that third product is to either of them.
+						</p>
+
+						<p align="justify">
+							The classic illustration is the red bus and the blue bus. Suppose commuters divide evenly between
+							driving a car and taking a red bus. Now add a blue bus that is identical to the red one except for its
+							color. Because driving and the red bus start out equally popular and the blue bus is identical to the red
+							one, a basic logit gives all three equal appeal, so each gets a third of commuters.
+							In reality almost nobody chooses a blue bus over a red one because of paint. The two buses would share
+							the red bus's riders, and driving would keep its half.
+						</p>
+
+						<p align="justify">
+							The same logic applies to price changes. When one price rises, the buyers who leave spread out
+							across the remaining products in proportion to their market shares, and the most popular product gains
+							the most, whether or not it looks anything like what they were buying.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								"A basic logit sends lost buyers to other products in proportion to their size, whether or not
+								those products look anything like what they were buying."
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>Why That Fails in Real Markets</h2>
+
+						<p align="justify">
+							Take airlines. When a low-cost carrier raises its fares, the travelers who leave tend to move to
+							another low-cost carrier more often than to a premium one. Someone who booked the cheapest fare to save
+							money is not likely to trade up because the budget airline got more expensive. Proportional
+							substitution sends those travelers to the biggest airline anyway, whether or not it resembles what
+							they were buying.
+						</p>
+
+						<p align="justify">
+							The people who leave are not a random sample of that carrier's customers. They tend to be the ones
+							who cared most about the fare, so they are more likely to land on another cheap option than on
+							whichever airline happens to be biggest.
+						</p>
+
+						<hr />
+
+						<h2>How Heterogeneous Preferences Fix It</h2>
+
+						<p align="justify">
+							A random-coefficients model, the approach behind the Berry, Levinsohn and Pakes (BLP) framework,
+							starts from a different assumption. In a basic logit every consumer weighs price and product
+							characteristics the same way. In a random-coefficients model those weights differ across consumers.
+							Some travelers care mostly about the fare, others about schedule or service, and the model estimates
+							from the data how much those tastes vary.
+						</p>
+
+						<p align="justify">
+							That one change alters where buyers go. The travelers who leave a low-cost carrier after a fare
+							increase are disproportionately the ones who care most about price, and they still care about price
+							after they leave. So they land on other products that are cheap, not on whatever is largest.
+							Substitution now follows how similar products are on the dimensions consumers care about, instead of
+							how popular they are.
+						</p>
+
+						<hr />
+
+						<h2>Why This Matters for Pricing and Competition Analysis</h2>
+
+						<p align="justify">
+							Any decision that depends on where lost buyers go depends on getting this right. A pricing team
+							deciding how far to raise a price needs to know how many buyers leave and how many stay within its own
+							product line. An economist assessing competition between two firms needs to know how close they are as
+							substitutes. A model that sends lost buyers to other products in proportion to their market shares
+							gets both wrong, and any pricing or competition conclusion built on it inherits the error.
+						</p>
+
+						<p align="justify">
+							Modeling differences across consumers lets the predicted price effects follow the close
+							substitutes instead of the whole market.
+						</p>
+
+						<p align="justify">
+							This flexibility is not free. The model needs variation in the data that reveals how tastes
+							differ. When that variation is limited, the estimate of how much tastes differ is imprecise, and the
+							substitution patterns that depend on it become less reliable. That is a reason to test how sensitive
+							the conclusions are to that estimate.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+							Berry, S., Levinsohn, J. and Pakes, A. (1995). Automobile Prices in Market Equilibrium.
+							<em>Econometrica.</em> The foundational paper for random-coefficients demand estimation in
+							differentiated-product markets.
+						</p>
+
+						<p align="justify">
+							Nevo, A. (2000). A Practitioner's Guide to Estimation of Random-Coefficients Logit Models of
+							Demand. <em>Journal of Economics &amp; Management Strategy.</em> A step-by-step guide to implementing the
+							approach.
+						</p>
+
+						<p align="justify">
+							Train, K. (2009). <em>Discrete Choice Methods with Simulation,</em> 2nd ed. Cambridge University
+							Press. A standard textbook treatment of logit models and their extensions, including IIA.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing • Industrial Organization • Causal Inference</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
