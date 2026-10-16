@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Treatment Spillovers: Who Is Actually Untreated? | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Every causal estimate depends on a claim that is easy to forget: that the comparison group stayed untouched. This post explains how treatment can reach units labeled as untreated, how to check whether it did, and why the same question matters when a benchmark is used in merger analysis." />
+		<meta property="og:title" content="Treatment Spillovers: Who Is Actually Untreated?" />
+		<meta property="og:description" content="Every causal estimate depends on a claim that is easy to forget: that the comparison group stayed untouched. This post explains how treatment can reach units labeled as untreated, how to check whether it did, and why the same question matters when a benchmark is used in merger analysis." />
+		<meta property="og:url" content="https://dineshpoddaturi.github.io/blog/treatment-spillovers.html" />
+		<meta property="og:type" content="article" />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Treatment Spillovers: Who Is Actually Untreated?</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							October 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Marketplace Causal Inference &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							Every causal estimate depends on a claim that is easy to forget: that the comparison group stayed
+							untouched. This post explains how treatment can reach units labeled as untreated, how to check
+							whether it did, and why the same question matters when a benchmark is used in merger analysis.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Core Problem: Who Is Actually Untreated?</h2>
+
+						<p align="justify">
+							In a randomized experiment, some units are assigned to treatment and the rest to control. The
+							standard analysis compares the two groups, and the difference is read as the effect of the treatment. That reading depends on assumptions, including that a unit's outcome depends only on its own assignment, not on anyone else's. This is the no-interference part of the Stable Unit Treatment Value Assumption, or SUTVA.
+						</p>
+
+						<p align="justify">
+							When the assumption fails, the label &ldquo;control&rdquo; describes the assignment but not what the unit
+							experienced. A control unit can be affected by a treatment it was never assigned. The difference between
+							the groups then no longer measures the effect of the treatment, because the comparison group is not the
+							world without it.
+						</p>
+
+						<p align="justify">
+							An earlier post on <a href="switchback-experiments.html">switchback experiments</a> covered one response
+							to this problem, which is to change the unit of randomization. This post is about a step before that:
+							checking whether the comparison group was actually untouched.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								&ldquo;Untreated&rdquo; describes the assignment, not the experience.
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>A Concrete Case: The Concert Discount</h2>
+
+						<p align="justify">
+							Say a ticketing platform shows a discount on a popular concert to a random half of its users. You see
+							it and tell a friend who happens to be in the control group. They cannot get the discount on their own
+							account, so they ask you to buy their ticket with yours.
+						</p>
+
+						<p align="justify">
+							Your friend's behavior changed because of something assigned to you, not to them. The purchase is
+							recorded under the treatment group, and it disappears from the control group. The experiment sees a
+							gain, but if your friend was going to buy anyway, the platform simply sold the same ticket at a lower
+							price.
+						</p>
+
+						<p align="justify">
+							A hypothetical example shows the size of the distortion. Suppose the platform has 1,000 treated and
+							1,000 control users, and each user buys at most one ticket, so counts and purchase rates tell the same story. With no spillover, treated users buy 100 tickets and control users buy 50, so the
+							estimated effect of the discount is 50 extra tickets. Now suppose 10 control users ask treated friends to
+							buy for them. Treated users now buy 110 tickets and control users buy 40. The estimated effect is 70
+							tickets, 40% larger than before. Total sales are still 150 tickets in both cases. The experiment reports a
+							bigger win only because ten purchases moved from one column to the other, at a lower price.
+						</p>
+
+						<p align="justify">
+							The treatment group took from the control group. That is the sense in which the control group was not
+							untreated.
+						</p>
+
+						<hr />
+
+						<h2>Exposure Comes in Several Forms</h2>
+
+						<p align="justify">
+							The concert example is a social spillover, but exposure can run through several channels, and
+							the bias does not have a fixed sign.
+						</p>
+
+						<p align="justify">
+							<strong>Geographic.</strong> A program run in one area can reach neighboring areas that were assigned
+							to control, through shared markets, shared services, or people moving between them. If the neighbors
+							benefit too, a treated-versus-control comparison can understate the effect of the program.
+						</p>
+
+						<p align="justify">
+							<strong>Social.</strong> Treatment can travel through friends, referrals, or shared information, as in
+							the concert example. How much of it a unit receives depends on how many treated units it is connected
+							to.
+						</p>
+
+						<p align="justify">
+							<strong>Marketplace.</strong> When units compete for the same buyers, jobs, or inventory, a gain for the
+							treated can come at the expense of the untreated. A comparison that ignores this can overstate what the intervention would do if it were rolled out to everyone.
+						</p>
+
+						<hr />
+
+						<h2>How to Check: Compare Control Outcomes by Exposure</h2>
+
+						<p align="justify">
+							One way to check is to compare control outcomes by how exposed each control unit was to the treated
+							ones. The steps could be as simple as the following. These are not the only steps, and the right ones
+							depend on the setting.
+						</p>
+
+						<p align="justify">
+							First, define an exposure measure that fits the setting. It could be distance in miles, the number
+							of treated friends, or the share of treated listings in the same category.
+						</p>
+
+						<p align="justify">
+							Second, group the control units by exposure, or regress their outcomes on the exposure measure.
+							Only control units belong in this comparison, because the question is whether units that were never
+							assigned treatment still move with how much treatment is nearby.
+						</p>
+
+						<p align="justify">
+							Third, read the pattern. If control outcomes are flat across exposure, the control group is
+							behaving like one. If control outcomes differ systematically with exposure, that is a sign the &ldquo;untreated&rdquo;
+							units may be contaminated.
+						</p>
+
+						<p align="justify">
+							The check has limits. Exposure is often not randomly assigned, so outcomes that move with distance are a
+							warning sign, not a measure of how big the spillover is. Control units near the treated ones may differ
+							from distant ones for other reasons, such as busier locations or heavier users. And finding no pattern does
+							not prove there was no spillover, especially with few units. The exposure measure may also miss the
+							channel through which treatment actually travels.
+						</p>
+
+						<p align="justify">
+							The check is still worth running. It tells you whether there is visible evidence against the
+							comparison group before you build a decision on it.
+						</p>
+
+						<hr />
+
+						<h2>Why This Matters Beyond Experiments</h2>
+
+						<p align="justify">
+							The same logic applies outside experiments. In merger analysis or regulatory matters, non-merging
+							rivals or unaffected markets often serve as the benchmark. But a merger changes the competitive landscape,
+							and that can change how those rivals behave. Then they may no longer show what would have happened without the deal.
+						</p>
+
+						<p align="justify">
+							For example, if rivals raise their prices in response to a merger, a comparison of merging firms
+							against rivals can understate the effect of the merger on the merging firms' prices, and it will miss the
+							rivals' own price response entirely. Whether that happens is an empirical question, and the same exposure
+							check applies. Do outcomes at non-merging rivals vary with how closely they compete with the merging
+							firms?
+						</p>
+
+						<p align="justify">
+							In all of these settings, the estimate is only as credible as the comparison group behind it.
+						</p>
+
+						<hr />
+
+						<h2>What to Do If You Find Contamination</h2>
+
+						<p align="justify">
+							Finding a pattern does not mean the experiment is lost, but it changes what can be claimed. There are
+							two common responses.
+						</p>
+
+						<p align="justify">
+							The first is to change the unit of randomization so that interference stays inside units, for
+							example by randomizing at the level of regions, networks, or time windows. The second is to change the
+							question and model the interference explicitly, estimating the effect of treatment under different levels
+							of exposure instead of a single treated-versus-control difference. Each trades some power or simplicity
+							for a more credible comparison.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+							Hudgens, M.G. and Halloran, M.E. (2008). Toward Causal Inference with Interference. <em>Journal of the
+							American Statistical Association.</em> On causal inference when one unit's treatment may affect another
+							unit's outcome.
+						</p>
+
+						<p align="justify">
+							Aronow, P.M. and Samii, C. (2017). Estimating Average Causal Effects Under General Interference, with
+							Application to a Social Network Experiment. <em>Annals of Applied Statistics.</em> On estimating causal
+							effects under general interference, including in social networks.
+						</p>
+
+						<p align="justify">
+							Miguel, E. and Kremer, M. (2004). Worms: Identifying Impacts on Education and Health in the Presence of
+							Treatment Externalities. <em>Econometrica.</em> On measuring program impacts when treatment has
+							externalities on untreated units.
+						</p>
+
+						<p align="justify">
+							Crepon, B., Duflo, E., Gurgand, M., Rathelot, R. and Zamora, P. (2013). Do Labor Market Policies Have
+							Displacement Effects? Evidence from a Clustered Randomized Experiment. <em>Quarterly Journal of
+							Economics.</em> On whether labor market policies displace outcomes for people who are not assisted.
+						</p>
+
+						<p align="justify">
+							Blake, T. and Coey, D. (2014). Why Marketplace Experimentation Is Harder than It Seems: The Role of
+							Test-Control Interference. <em>Proceedings of the ACM Conference on Economics and Computation.</em> On
+							test-control interference in marketplace experiments.
+						</p>
+
+						<p align="justify">
+							Johari, R., Li, H., Liskovich, I. and Weintraub, G. (2022). Experimental Design in Two-Sided Platforms:
+							An Analysis of Bias. <em>Management Science.</em> On bias in experiments on two-sided platforms.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Causal Inference • Pricing</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
