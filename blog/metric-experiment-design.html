@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>The Metric You Optimize Changes the Experiment You Design | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="How long an experiment runs, what unit it randomizes, and how much traffic it needs all depend on one earlier choice: the metric. This post explains how the metric shapes observation windows, randomization, measurement, and statistical power, and how CUPED can help." />
+		<meta property="og:title" content="The Metric You Optimize Changes the Experiment You Design" />
+		<meta property="og:description" content="How long an experiment runs, what unit it randomizes, and how much traffic it needs all depend on one earlier choice: the metric. This post explains how the metric shapes observation windows, randomization, measurement, and statistical power, and how CUPED can help." />
+		<meta property="og:url" content="https://dineshpoddaturi.github.io/blog/metric-experiment-design.html" />
+		<meta property="og:type" content="article" />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>The Metric You Optimize Changes the Experiment You Design</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							October 2026 &nbsp;|&nbsp; Applied Economics &nbsp;|&nbsp; Experimentation &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							How long an experiment runs, what unit it randomizes, and how much traffic it needs all depend on
+							one earlier choice: the metric. This post walks through how the metric shapes the observation
+							window, the unit of randomization, what you have to measure, and the sample size, and how variance
+							reduction with CUPED fits in.
+						</p>
+
+						<hr class="major" />
+
+						<h2>The Metric Comes First</h2>
+
+						<p align="justify">
+							The metric you want to improve decides how long your experiment runs, what unit you randomize, and
+							how much traffic you need.
+						</p>
+
+						<p align="justify">
+							It is tempting to start from a familiar setup, a user-level test split 50/50 for two weeks, and
+							decide at the end which metric to read. But each of those choices depends on how the metric
+							behaves: how quickly it moves, whose behavior drives it, and how noisy it is. So the design starts
+							one step earlier, with the business objective. What decision will this experiment inform? The
+							metric is whatever measures progress on that objective, and once it is chosen, most of the design
+							follows from it.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								Decide what you want to improve before deciding how to test it.
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>Duration and Observation Windows</h2>
+
+						<p align="justify">
+							Some metrics move quickly and show up right away. Clicks, conversion, and page load time respond
+							within a session, so a short test can measure them, although it is still worth running at least a
+							full week to cover day-of-week patterns.
+						</p>
+
+						<p align="justify">
+							Other metrics only reveal the effect weeks or months later. Retention, repeat purchase, and
+							lifetime value often need a longer observation window. When running the test that long is not practical,
+							two tools help. A long-term holdout keeps a small group on the old experience after launch, so the
+							long-run effect can still be measured. A surrogate metric is a short-term outcome used to estimate the
+							long-term one. It needs to be validated for that purpose. A metric that predicts long-term behavior
+							in general does not automatically capture how a particular treatment changes it.
+						</p>
+
+						<hr />
+
+						<h2>The Unit of Randomization</h2>
+
+						<p align="justify">
+							When users do not affect each other much, a metric like conversion can usually be tested by
+							randomizing users. Each user's outcome depends mostly on their own treatment, so a treated user and
+							a control user can be compared directly.
+						</p>
+
+						<p align="justify">
+							Marketplace metrics are different. Liquidity, how reliably buyers and sellers find each other,
+							depends on both sides of the market at once. Treated and control buyers draw on the same supply, so
+							a change that helps treated buyers find listings can leave fewer listings for control buyers. The
+							control group is then no longer an untouched comparison, and the test can overstate the benefit
+							compared with giving every buyer the treatment. More generally, the direction and size of the bias depend on how the treatment
+							changes shared supply and demand. An earlier post on <a href="treatment-spillovers.html">treatment spillovers</a> covers how
+							to check for this.
+						</p>
+
+						<p align="justify">
+							The design then has to account for the interference. Options include randomizing time windows in a
+							<a href="switchback-experiments.html">switchback experiment</a>, whole markets or regions, or in
+							some settings both sides of the market. The trade-off is fewer independent units, which means less
+							statistical power.
+						</p>
+
+						<hr />
+
+						<h2>Profit Versus Revenue</h2>
+
+						<p align="justify">
+							The objective also changes what you have to measure. A simple revenue metric needs price and
+							quantity, plus any refunds or cancellations, depending on how revenue is defined. A profit metric
+							needs the cost of each transaction as well: cost of goods, shipping, and
+							payment fees. Discounts, refunds, and returns also have to be tracked, because they reduce the
+							revenue actually earned and can add costs of their own. That data has to be logged at the transaction level before the
+							test starts, because it is hard to reconstruct reliably afterward.
+						</p>
+
+						<p align="justify">
+							The difference shows up in the result, not just the logging. Take a discount test. Measured on
+							revenue, it can look like a clear win, because volume rises. Measured on profit, the same test can
+							look very different: every extra unit sells at a lower margin, and some of the discounted purchases
+							would have happened anyway. An earlier post on the
+							<a href="revenue-maximization-trap.html">revenue maximization trap</a> shows how far apart the two
+							objectives can be.
+						</p>
+
+						<hr />
+
+						<h2>Noise, Traffic, and CUPED</h2>
+
+						<p align="justify">
+							How much traffic a test needs depends on how noisy the metric is. A noisy metric bounces around a
+							lot from one user to the next, so a real change is harder to tell apart from chance, and you need
+							more users to see it.
+						</p>
+
+						<p align="justify">
+							Conversion is a yes-or-no metric: each user either buys or does not. Profit per user is often much
+							noisier. Most users contribute nothing, a few contribute a lot, and margins vary from order to order
+							with shipping, discounts, and returns. So a profit test can need substantially more users than a
+							conversion test to detect a change of similar importance. The exact number depends on how spread out each
+							metric is, its baseline level, and the smallest change worth detecting.
+						</p>
+
+						<p align="justify">
+							CUPED is one way to bring that number down. Much of what a user does during an experiment can be
+							predicted from what they did before it. Someone who spent a lot last month will probably spend a lot
+							this month too. CUPED adjusts each user's outcome for what their past behavior already predicts,
+							which takes some of the noise out of the comparison. Less noise means fewer users may be needed to
+							detect the same effect.
+						</p>
+
+						<p align="justify">
+							It has two conditions. It helps only when past behavior actually predicts the outcome, so it does
+							little for new users with no history. And the past behavior has to be measured before the experiment
+							starts, so the treatment cannot affect it. Tracking a steadier metric alongside profit, or capping a
+							few extreme values, are other common options. Capping needs care, because changing how the outcome
+							is measured can change the question the test answers.
+						</p>
+
+						<hr />
+
+						<h2>A Practical Design Sequence</h2>
+
+						<p align="justify">
+							Putting the pieces together, a design can follow this order:
+						</p>
+
+						<ol>
+							<li><strong>Define the objective.</strong> What decision will the result inform?</li>
+							<li><strong>Choose the metric</strong> that measures progress on that objective, and the
+								<a href="guardrails-experimentation.html">guardrails</a> that protect what it misses.</li>
+							<li><strong>Set the observation window.</strong> How long until the effect shows up?</li>
+							<li><strong>Assess interference.</strong> Does treating one unit change another unit's outcome? If
+								so, choose a unit of randomization that contains it.</li>
+							<li><strong>Determine the data you need,</strong> including transaction-level costs if the
+								objective is profit.</li>
+							<li><strong>Calculate the sample size</strong> from the metric's variance and the smallest effect
+								worth detecting, after any variance reduction.</li>
+						</ol>
+
+						<hr />
+
+						<h2>The Takeaway</h2>
+
+						<p align="justify">
+							Decide what you want to improve before deciding how to test it. The metric answers most of the
+							design questions for you. The ones it leaves open, such as how interference travels in a particular
+							market, become much easier to see once the metric is fixed.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+							Kohavi, R., Tang, D. and Xu, Y. (2020). <em>Trustworthy Online Controlled Experiments: A Practical
+							Guide to A/B Testing.</em> Cambridge University Press. On choosing metrics, the overall evaluation
+							criterion, and experiment design in practice.
+						</p>
+
+						<p align="justify">
+							Deng, A., Xu, Y., Kohavi, R. and Walker, T. (2013). Improving the Sensitivity of Online Controlled
+							Experiments by Utilizing Pre-Experiment Data. <em>Proceedings of the ACM International Conference
+							on Web Search and Data Mining.</em> The paper that introduced CUPED.
+						</p>
+
+						<p align="justify">
+							Athey, S., Chetty, R., Imbens, G.W. and Kang, H. (2026). The Surrogate Index: Combining Short-Term
+							Proxies to Estimate Long-Term Treatment Effects More Rapidly and Precisely. <em>The Review of
+							Economic Studies</em>, 93(4), 2284&ndash;2312. On using validated short-term outcomes to estimate
+							long-term effects.
+						</p>
+
+						<p align="justify">
+							Johari, R., Li, H., Liskovich, I. and Weintraub, G. (2022). Experimental Design in Two-Sided
+							Platforms: An Analysis of Bias. <em>Management Science.</em> On how randomization choices create
+							bias in marketplace experiments.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing • Industrial Organization • Causal Inference</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
