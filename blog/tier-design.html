@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>Why the Cheaper Tier Is Worse on Purpose | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Adding a cheaper tier raises one question before any other: where do its buyers come from? This post shows how diversion, willingness to pay, and the choice of metric come together in tier design, using airline fares as the main example." />
+		<meta property="og:title" content="Why the Cheaper Tier Is Worse on Purpose" />
+		<meta property="og:description" content="Adding a cheaper tier raises one question before any other: where do its buyers come from? This post shows how diversion, willingness to pay, and the choice of metric come together in tier design, using airline fares as the main example." />
+		<meta property="og:url" content="https://dineshpoddaturi.github.io/blog/tier-design.html" />
+		<meta property="og:type" content="article" />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>Why the Cheaper Tier Is Worse on Purpose</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							November 2026 &nbsp;|&nbsp; Pricing &nbsp;|&nbsp; Industrial Organization &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							Two earlier posts covered <a href="elasticity-to-diversion.html">how diversion ratios follow from
+							demand elasticities</a> and <a href="metric-experiment-design.html">how the metric you optimize
+							shapes the experiment you design</a>. Tier design puts both ideas to work. This post shows how,
+							using airline fares as the main example.
+						</p>
+
+						<hr class="major" />
+
+						<h2>A Menu, Not a Product</h2>
+
+						<p align="justify">
+							Basic economy takes away seat selection. A free software plan adds a watermark. Giving every
+							customer seat selection or a clean file would cost the seller almost nothing. These limits exist for
+							a different reason. They help keep customers who would pay for the better tier from settling for the
+							cheaper one.
+						</p>
+
+						<p align="justify">
+							That is because a tier is not a standalone product. It is one option on a menu, and every option on
+							the menu competes with the others. A traveler looking at a flight sees basic economy, main cabin,
+							and perhaps a premium cabin side by side, along with fares from rival airlines and the option of
+							not flying. A software buyer sees a free plan, a paid plan, a competitor's product, and the option
+							of doing without. Adding or changing one tier changes what the whole menu earns.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								The question is not how many people buy the cheaper tier. It is where those buyers come from.
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>Where Do the Buyers Come From?</h2>
+
+						<p align="justify">
+							Buyers of a new cheaper tier come from two places. Some would otherwise have bought from a
+							competitor or not bought at all. They are new revenue. Others would otherwise have bought the
+							seller's own higher tier. They are the same customer paying less.
+						</p>
+
+						<p align="justify">
+							The <a href="elasticity-to-diversion.html">diversion ratio</a> measures that split. In merger
+							analysis it describes how sales move between rival firms. Inside a single menu, it describes how
+							sales move between a seller's own tiers. If a large share of the cheaper tier's sales would
+							otherwise have gone to the tier above it, the new tier mostly cannibalizes. If most of its buyers
+							come from competitors or from not buying, the tier is expanding the market.
+						</p>
+
+						<p align="justify">
+							That split depends on how customers substitute, which is why the demand model matters. A simple logit
+							model assumes a new option draws customers from every other option in proportion to their market
+							shares. That can understate how much of the new tier's demand comes from the tier right above it,
+							which is usually its closest substitute. An earlier post on
+							<a href="consumer-substitution-patterns.html">consumer substitution patterns</a> explains why.
+						</p>
+
+						<hr />
+
+						<h2>Designing the Restrictions</h2>
+
+						<p align="justify">
+							A seller usually cannot tell which customers would pay more. They can only offer options and let
+							customers choose. Economists call this self-selection, and it is the core of second-degree price
+							discrimination. The design goal is a menu where each type of customer prefers the option meant for
+							them.
+						</p>
+
+						<p align="justify">
+							Restrictions do that work. The cheap tier has to leave out something the higher-paying customers
+							care about and the price-sensitive customers care less about. Airlines show this clearly. Business
+							travelers often value being able to change a ticket and tend to be less sensitive to price. Leisure
+							travelers are more likely to book early, need less flexibility, and care more about the fare. A
+							no-changes rule barely bothers the
+							leisure traveler but matters a lot to the business traveler, so each one picks the fare meant for
+							them.
+						</p>
+
+						<p align="justify">
+							That condition is what makes the design work. If every customer valued flexibility equally, the
+							restriction would lower what everyone is willing to pay without separating anyone. It works only
+							because the customers who value the missing feature most are also the ones willing to pay more.
+						</p>
+
+						<p align="justify">
+							Estimating those values is a demand problem. In a discrete choice model, the willingness to pay for
+							a feature such as a changeable ticket is its coefficient divided by the absolute value of the price
+							coefficient. A model
+							that allows preferences to differ across customers gives a range of that value rather than a single
+							number. That range is what the design needs, because it shows which restrictions separate customers
+							and which ones just make the product worse for everyone.
+						</p>
+
+						<hr />
+
+						<h2>Setting the Price Gap</h2>
+
+						<p align="justify">
+							The gap between the cheaper and higher tier has two limits. It has to be small enough that
+							higher-tier customers do not find the savings worth giving up what the cheaper tier leaves out. And
+							the cheaper price has to be low enough that price-sensitive customers prefer it to a competitor or to
+							not buying at all.
+						</p>
+
+						<p align="justify">
+							Within those limits there is a trade-off. A smaller gap pushes some shoppers to buy up, but the
+							cheaper tier competes less well against rivals. A larger gap wins more price-sensitive customers, but
+							more higher-tier customers trade down. Where to set it depends on how many customers of each type
+							there are and how price-sensitive each group is. That is a demand estimation question.
+						</p>
+
+						<hr />
+
+						<h2>Measuring Whether the Tier Works</h2>
+
+						<p align="justify">
+							This is where the <a href="metric-experiment-design.html">choice of metric</a> decides the answer.
+							Judged on its own sales, a cheaper tier that sells well looks like a success. Judged on the revenue
+							of the whole menu, the same tier can be a loss if most of its buyers traded down.
+						</p>
+
+						<p align="justify">
+							So the metric has to cover the menu, not the tier. For an airline, total revenue per flight or per
+							route across all fare classes is a natural starting point, or contribution margin if the objective is
+							profit. It should include add-ons, because basic
+							economy travelers often pay separately for seats or bags, and leaving those out understates what
+							the tier earns. Two diagnostics help explain the result: the share of shoppers who see the cheaper
+							tier and buy up, and the share of past higher-tier customers who now buy the cheaper one.
+						</p>
+
+						<p align="justify">
+							A tier change can also have slower effects. Customers who run into restrictions they did not expect
+							may go elsewhere next time. Complaints and repeat purchase rates work well as
+							<a href="guardrails-experimentation.html">guardrails</a> alongside the main metric.
+						</p>
+
+						<hr />
+
+						<h2>Testing a Tier Change</h2>
+
+						<p align="justify">
+							Testing a tier change is harder than testing a button color. If individual customers are randomized,
+							people may see different menus for the same product, which raises fairness concerns. And when tiers
+							sell from the same inventory, as seats on a flight do, a seat sold to a treated shopper is no longer
+							available to a control shopper. That is interference, covered in the earlier post on
+							<a href="treatment-spillovers.html">treatment spillovers</a>.
+						</p>
+
+						<p align="justify">
+							The usual answer is to randomize at a level that contains the spillovers, such as a route, market, or
+							region, at the cost of fewer units and less statistical power. A
+							<a href="switchback-experiments.html">switchback design</a> is usually a poor fit, because customers
+							who check more than once would see different menus. For airlines, the test also has to run long
+							enough to cover the booking window, with outcomes tracked by departure date.
+						</p>
+
+						<hr />
+
+						<h2>A Practical Design Sequence</h2>
+
+						<p align="justify">
+							Putting the pieces together, tier design can follow this order:
+						</p>
+
+						<ol>
+							<li><strong>Identify the customer types</strong> and what each one values, using a demand model
+								that allows preferences to differ.</li>
+							<li><strong>Estimate substitution</strong> between tiers and to outside options, so you know where
+								a new tier's buyers would come from.</li>
+							<li><strong>Choose restrictions</strong> that the higher-paying customers care about and the
+								price-sensitive customers care less about.</li>
+							<li><strong>Set the price gap</strong> within the limits that keep each group in its intended
+								tier.</li>
+							<li><strong>Define a menu-level metric,</strong> including add-ons, with guardrails for slower
+								effects.</li>
+							<li><strong>Test by route, market, or region,</strong> long enough to cover the full purchase window.</li>
+						</ol>
+
+						<hr />
+
+						<h2>The Takeaway</h2>
+
+						<p align="justify">
+							A cheaper tier is worth adding only if it brings in customers the seller would otherwise lose
+							without pulling too many away from the tier above it. Diversion tells you who moves. The metric
+							tells you whether the move was worth it. Tier design needs both.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+							Mussa, M. and Rosen, S. (1978). Monopoly and Product Quality. <em>Journal of Economic Theory</em>,
+							18(2), 301&ndash;317.
+						</p>
+
+						<p align="justify">
+							Deneckere, R.J. and McAfee, R.P. (1996). Damaged Goods. <em>Journal of Economics &amp; Management
+							Strategy</em>, 5(2), 149&ndash;174.
+						</p>
+
+						<p align="justify">
+							Tirole, J. (1988). <em>The Theory of Industrial Organization.</em> MIT Press.
+						</p>
+
+						<p align="justify">
+							Talluri, K.T. and van Ryzin, G.J. (2004). <em>The Theory and Practice of Revenue Management.</em>
+							Springer.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing • Industrial Organization • Causal Inference</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
