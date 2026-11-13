@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-73TQ3W78YM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-73TQ3W78YM');
+		</script>
+
+		<title>A Predictive Model Can Be Right for the Wrong Reason | Dinesh R Poddaturi</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="A predictive demand model can forecast well and still not understand demand. This post explains why forecasting under the historical system differs from predicting the effect of a pricing decision, how consumer choice supplies the building blocks, and where flexible models fit." />
+		<meta property="og:title" content="A Predictive Model Can Be Right for the Wrong Reason" />
+		<meta property="og:description" content="A predictive demand model can forecast well and still not understand demand. This post explains why forecasting under the historical system differs from predicting the effect of a pricing decision, how consumer choice supplies the building blocks, and where flexible models fit." />
+		<meta property="og:url" content="https://dineshpoddaturi.github.io/blog/prediction-wrong-reason.html" />
+		<meta property="og:type" content="article" />
+		<link rel="icon" type="image/png" href="../favicon.png" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper">
+
+			<div id="main">
+				<div class="inner">
+
+					<section>
+						<header class="main">
+							<h1>A Predictive Model Can Be Right for the Wrong Reason</h1>
+						</header>
+
+						<p style="color: #888; font-size: 0.85rem;">
+							November 2026 &nbsp;|&nbsp; Pricing &nbsp;|&nbsp; Industrial Organization &nbsp;|&nbsp; Causal Inference &nbsp;|&nbsp;
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+						<p align="justify" style="font-style: italic;">
+							Earlier posts covered <a href="instrumental-variables-2sls.html">why price is endogenous</a> and
+							<a href="consumer-substitution-patterns.html">why consumers do not treat every product as a substitute</a>.
+							This post brings the two together. A predictive demand model can forecast sales well and still get the
+							behavior behind them wrong, and the fix is to build the model from how consumers actually choose.
+						</p>
+
+						<hr class="major" />
+
+						<h2>Two Kinds of Prediction</h2>
+
+						<p align="justify">
+							A forecast and a pricing decision both ask about future demand, but they ask under different conditions. A forecast asks what demand will be if the market keeps working the way it did in the data. A pricing decision asks what demand will be after you change something: a price, a product, the set of options customers see.
+						</p>
+						<p align="justify">
+							A flexible model trained on history can be very good at the first question. It learns whatever relationships produced past sales, and as long as those relationships hold, its forecasts are accurate. The second question is different. A pricing decision moves the market away from the conditions the model learned, and a model that only learned past relationships has no way to know what happens next.
+						</p>
+
+						<div style="background: #f8f8f8; padding: 1.5rem; border-left: 4px solid #f56a6a; margin: 2rem 0;">
+							<p style="margin: 0; font-style: italic;">
+								Forecast accuracy shows the model learned the past. It does not show the model understands the behavior that produced it.
+							</p>
+						</div>
+
+						<hr />
+
+						<h2>How a Good Forecast Learns the Wrong Behavior</h2>
+
+						<p align="justify">
+							Suppose a firm raises prices in weeks it expects to be busy: a holiday weekend, a popular event, a stretch of good weather. The firm knows something about demand that the data may not fully capture, and it sets prices accordingly. Those same conditions also raise sales.
+						</p>
+						<p align="justify">
+							A predictive model trained on that history sees high prices next to high sales. Because price carries information about demand, the model can learn a positive relationship between price and sales, even though customers, on the whole, buy less when prices rise. The forecast is accurate. The behavior behind it is backwards.
+						</p>
+						<p align="justify">
+							A held-out test won't catch this. The held-out data comes from the same history, where prices still rose in busy weeks, so the predictive model looks just as accurate there. The trouble starts when the firm uses that predictive model to set prices. Now prices no longer track expected demand, and the pattern the model relied on is gone.
+						</p>
+						<p align="justify">
+							You see the same thing outside pricing. If promotions mostly went to customers who were going to buy anyway, a predictive model credits the promotion with sales that would have happened without it. Stockouts are another example. When a product sells out, the sales data only records what was available to buy, not how many people wanted it. A model trained on sales reads those weeks as low demand, when demand was actually high enough to empty the shelves.
+						</p>
+
+						<hr />
+
+						<h2>Demand Comes From Choices</h2>
+
+						<p align="justify">
+							Demand is the sum of many individual choices. A customer weighs the price against what the product offers, its uses and quality, and against the alternatives, including not buying at all.
+						</p>
+						<p align="justify">
+							Say you are deciding whether to see a movie. You look at the ticket price, how comfortable the seats are, the movie itself and its reviews, and what the concessions cost. If none of it appeals, you might pick a different movie, or skip it and take a walk in the park or get ice cream instead.
+						</p>
+						<p align="justify">
+							That one decision contains the building blocks of demand:
+						</p>
+						<ul>
+							<li><strong>Price sensitivity.</strong> A higher price makes the option less attractive, and some customers care about price much more than others.</li>
+							<li><strong>Preferences for product features.</strong> Seat comfort, the movie, the reviews. Customers value these differently.</li>
+							<li><strong>Substitution between similar options.</strong> When an option gets worse or more expensive, customers move first to the closest alternatives, like another movie, before leaving the category.</li>
+							<li><strong>The outside option.</strong> Not buying at all is always on the menu.</li>
+						</ul>
+						<p align="justify">
+							Economic demand models, from logit and nested logit to random-coefficients models, are ways of writing these pieces down and estimating them from data.
+						</p>
+
+						<hr />
+
+						<h2>What the Building Blocks Make Possible</h2>
+
+						<p align="justify">
+							A model built from those pieces gives forecasts that come with a reason. Because price sensitivity, feature preferences, and substitution are explicit, the model can answer questions the historical data never showed directly: what happens to demand if this price changes, if a new product enters, or if a rival cuts its price.
+						</p>
+						<p align="justify">
+							This only works if the estimates are credible. The price response has to come from price changes that had nothing to do with demand, like a randomized price test, or a cost shock that moves price without affecting demand directly and can serve as an <a href="instrumental-variables-2sls.html">instrument</a>. Even then, the answers are only as good as the assumptions about how customers behave.
+						</p>
+						<p align="justify">
+							There is also a limit to what a demand model alone can say. It tells you how customers respond to a rival's price cut. How the rival decides to set that price, and how the market settles afterward, requires modeling the firms as well.
+						</p>
+
+						<hr />
+
+						<h2>Where Flexible Models Fit</h2>
+
+						<p align="justify">
+							Once the behavior is right, flexible models are useful for everything around it. Seasonality, weather, events, and local conditions all shift demand in ways that are hard to specify by hand and easy for a flexible model to learn. <a href="double-machine-learning.html">Double machine learning</a> uses a related idea. Flexible models absorb the many factors that shift demand, which helps isolate the effect of price. It estimates that price effect, though, not a full picture of how customers substitute between options.
+						</p>
+						<p align="justify">
+							Flexible models also make a good check on the economic model. If a flexible forecast keeps beating the underlying economic model in some part of the data, that is a sign an assumption about customer behavior is missing, wrong, or needs to be adapted. The gap is a place to investigate, not proof of a specific error. It might point to a substitution pattern the model rules out, a group of customers with different price sensitivity, or a demand shifter that was left out.
+						</p>
+
+						<hr />
+
+						<h2>A Practical Order of Work</h2>
+
+						<ol>
+							<li><strong>Define the choice.</strong> What options does a customer compare, and what does not buying look like?</li>
+							<li><strong>Specify the building blocks.</strong> Price sensitivity, the product features that matter, and how customers substitute.</li>
+							<li><strong>Find credible price variation.</strong> Experiments, cost shocks, or policy changes that moved price independently of unobserved demand conditions.</li>
+							<li><strong>Let flexible models handle the demand shifters.</strong> Seasonality, weather, events, and other factors around the behavior.</li>
+							<li><strong>Benchmark against a flexible forecast.</strong> Where it consistently does better, revisit the behavioral assumptions.</li>
+							<li><strong>Test the decision.</strong> Before a full rollout, run the recommendation as an experiment and compare the result with what the model predicted.</li>
+						</ol>
+
+						<hr />
+
+						<h2>The Takeaway</h2>
+
+						<p align="justify">
+							Accuracy on historical data tells you a model has learned the past. A pricing decision asks about a market that has changed, and answering that requires knowing how customers choose. Build the behavior first and use the most powerful tools you have to refine it.
+						</p>
+
+						<hr />
+
+						<h2>Further Reading</h2>
+
+						<p align="justify">
+							Berry, S., Levinsohn, J. and Pakes, A. (1995). Automobile Prices in Market Equilibrium. <em>Econometrica</em>, 63(4), 841&ndash;890.
+						</p>
+						<p align="justify">
+							Kleinberg, J., Ludwig, J., Mullainathan, S. and Obermeyer, Z. (2015). Prediction Policy Problems. <em>American Economic Review</em>, 105(5), 491&ndash;495.
+						</p>
+						<p align="justify">
+							Athey, S. (2017). Beyond Prediction: Using Big Data for Policy Problems. <em>Science</em>, 355(6324), 483&ndash;485.
+						</p>
+
+						<hr />
+
+						<p style="color: #888; font-size: 0.85rem;">
+							<a href="../blog.html">&larr; Back to Blog</a>
+						</p>
+
+					</section>
+
+				</div>
+			</div>
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+
+					<div style="text-align: center; padding: 1.5rem 0 1rem 0;">
+						<img src="../images/MyImage6.png" alt="Dinesh R Poddaturi"
+							 style="width: 150px; height: 150px;
+									border-radius: 50%;
+									object-fit: cover;
+									border: 3px solid #f56a6a;" />
+						<p style="margin-top: 0.75rem;
+								  font-size: 0.9rem;
+								  font-weight: bold;
+								  color: #3d4449;">Dinesh R Poddaturi, PhD</p>
+						<p style="font-size: 0.8rem;
+								  color: #888;
+								  margin-top: -0.5rem;">Applied Economist<br/>
+								  Pricing • Industrial Organization • Causal Inference</p>
+					</div>
+
+					<nav id="menu">
+						<header class="major">
+							<h2>Menu</h2>
+						</header>
+						<ul>
+							<li><a href="../index.html">Homepage</a></li>
+							<li><a href="../research.html">Research &amp; Writing</a></li>
+							<li><a href="../blog.html">Blog</a></li>
+							<li><a href="../CV.html">CV</a></li>
+							<li><a href="../about.html">About</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<header class="major">
+							<h2>Social</h2>
+						</header>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/dinesh-r-poddaturi/" class="icon brands fa-linkedin fa-5x" target="_blank">
+								<span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/DineshPoddaturi" class="icon brands fa-github fa-5x" target="_blank">
+								<span class="label">Github</span></a></li>
+							<li><a href="https://ssrn.com/author=10964128" target="_blank">
+								<span class="label">SSRN</span></a></li>
+						</ul>
+					</section>
+
+					<section>
+						<header class="major">
+							<h2>Get in touch</h2>
+						</header>
+						<p>Please use either LinkedIn or the following email to get in touch.</p>
+						<ul class="contact">
+							<li class="icon solid fa-envelope">
+								<a href="mailto:dineshreddypoddaturi@gmail.com">dineshreddypoddaturi@gmail.com</a></li>
+						</ul>
+					</section>
+
+					<footer id="footer">
+						<p class="copyright">&copy; Dinesh R Poddaturi, 2026. All rights reserved.
+						Design: <a href="https://html5up.net">HTML5 UP</a></p>
+					</footer>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../assets/js/jquery.min.js"></script>
+		<script src="../assets/js/browser.min.js"></script>
+		<script src="../assets/js/breakpoints.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
